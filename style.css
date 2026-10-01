@@ -2376,3 +2376,742 @@ footer {
 .about-cta a:hover {
     background: var(--forest-dark);
 }
+
+/* =========================================================
+   GEAR PAGE
+========================================================= */
+
+
+/* =========================
+   GEAR HERO
+========================= */
+
+.gear-page-hero {
+    min-height: 560px;
+
+    display: flex;
+    align-items: center;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(14, 40, 30, 0.88),
+            rgba(14, 40, 30, 0.38)
+        ),
+        url("assets/main.jpg");
+
+    background-size: cover;
+    background-position: center;
+
+    padding: 130px 20px 90px;
+
+    position: relative;
+}
+
+.gear-hero-content {
+    width: min(1100px, 90%);
+    margin: 0 auto;
+
+    color: white;
+}
+
+.gear-hero-content .eyebrow {
+    color: #d8c9ad;
+    margin-bottom: 18px;
+}
+
+.gear-hero-content h1 {
+    font-family: "Playfair Display", serif;
+
+    font-size: clamp(3.5rem, 7vw, 6.5rem);
+    line-height: 0.94;
+    font-weight: 500;
+
+    margin: 0 0 28px;
+
+    letter-spacing: -0.03em;
+}
+
+.gear-hero-content > p:not(.eyebrow) {
+    max-width: 560px;
+
+    color: rgba(255,255,255,0.82);
+
+    font-size: 1rem;
+    line-height: 1.8;
+
+    margin: 0 0 35px;
+}
+
+.gear-scroll {
+    display: inline-block;
+
+    color: white;
+    text-decoration: none;
+
+    font-size: 0.75rem;
+    font-weight: 700;
+
+    letter-spacing: 0.12em;
+
+    border-bottom: 1px solid rgba(255,255,255,0.5);
+
+    padding-bottom: 8px;
+
+    transition: 0.25s ease;
+}
+
+.gear-scroll:hover {
+    color: var(--cream);
+    border-color: var(--cream);
+}
+
+
+
+/* =========================
+   GEAR INTRO
+========================= */
+
+.gear-intro {
+    background: var(--cream-light);
+
+    padding: 110px 0;
+}
+
+.gear-intro-grid {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 100px;
+
+    align-items: center;
+}
+
+.gear-intro h2 {
+    font-family: "Playfair Display", serif;
+
+    color: var(--forest);
+
+    font-size: clamp(3rem, 5vw, 5rem);
+
+    line-height: 0.95;
+
+    font-weight: 500;
+
+    margin: 12px 0 0;
+
+    letter-spacing: -0.03em;
+}
+
+.gear-intro-text {
+    max-width: 560px;
+}
+
+.gear-large-text {
+    font-family: "Playfair Display", serif;
+
+    color: var(--forest);
+
+    font-size: 1.65rem;
+
+    line-height: 1.4;
+
+    margin: 0 0 25px;
+}
+
+.gear-intro-text p:not(.gear-large-text) {
+    color: var(--muted);
+
+    line-height: 1.8;
+
+    margin: 0 0 18px;
+}
+
+
+
+/* =========================
+   ACTIVITY INTRO / NAV
+========================= */
+
+.gear-activities {
+    background: var(--forest);
+
+    padding: 100px 0 90px;
+
+    color: white;
+}
+
+.gear-activities-heading {
+    max-width: 700px;
+
+    margin-bottom: 55px;
+}
+
+.gear-activities-heading .eyebrow {
+    color: #d8c9ad;
+}
+
+.gear-activities-heading h2 {
+    font-family: "Playfair Display", serif;
+
+    font-size: clamp(3rem, 5vw, 4.7rem);
+
+    line-height: 0.98;
+
+    font-weight: 500;
+
+    margin: 12px 0 22px;
+}
+
+.gear-activities-heading > p:not(.eyebrow) {
+    max-width: 520px;
+
+    color: rgba(255,255,255,0.68);
+
+    line-height: 1.7;
+
+    margin: 0;
+}
+
+
+/* Activity links */
+
+.gear-activity-nav {
+    display: grid;
+
+    grid-template-columns: repeat(5, 1fr);
+
+    border-top: 1px solid rgba(255,255,255,0.18);
+
+    border-bottom: 1px solid rgba(255,255,255,0.18);
+}
+
+.gear-activity-link {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 18px;
+
+    padding: 28px 20px;
+
+    color: white;
+
+    text-decoration: none;
+
+    border-right: 1px solid rgba(255,255,255,0.18);
+
+    transition: 0.3s ease;
+}
+
+.gear-activity-link:first-child {
+    border-left: 1px solid rgba(255,255,255,0.18);
+}
+
+.gear-activity-link span {
+    font-size: 0.7rem;
+
+    color: #b9aa8f;
+
+    letter-spacing: 0.1em;
+}
+
+.gear-activity-link {
+    font-family: "Playfair Display", serif;
+
+    font-size: 1.35rem;
+}
+
+.gear-activity-link:hover {
+    background: rgba(255,255,255,0.07);
+
+    color: var(--cream);
+}
+
+
+
+/* =========================
+   ACTIVITY SECTIONS
+========================= */
+
+.gear-activity-section {
+    background: var(--cream-light);
+
+    padding: 120px 0;
+}
+
+.gear-activity-section:nth-of-type(even) {
+    background: var(--cream);
+}
+
+.gear-activity-layout {
+    display: grid;
+
+    grid-template-columns: 1.05fr 0.95fr;
+
+    gap: 90px;
+
+    align-items: center;
+}
+
+
+/* Image */
+
+.gear-activity-image {
+    position: relative;
+
+    height: 600px;
+
+    overflow: hidden;
+
+    background: var(--forest);
+}
+
+.gear-activity-image img {
+    width: 100%;
+    height: 100%;
+
+    display: block;
+
+    object-fit: cover;
+
+    transition: transform 0.6s ease;
+}
+
+.gear-activity-section:hover .gear-activity-image img {
+    transform: scale(1.025);
+}
+
+
+/* Number */
+
+.gear-image-number {
+    position: absolute;
+
+    left: 25px;
+    bottom: 22px;
+
+    width: 48px;
+    height: 48px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    background: var(--cream);
+
+    color: var(--forest);
+
+    font-size: 0.75rem;
+
+    font-weight: 700;
+
+    letter-spacing: 0.08em;
+}
+
+
+
+/* =========================
+   ACTIVITY CONTENT
+========================= */
+
+.gear-activity-content {
+    max-width: 500px;
+}
+
+.gear-activity-content .eyebrow {
+    color: var(--brown);
+
+    margin-bottom: 14px;
+}
+
+.gear-activity-content h2 {
+    font-family: "Playfair Display", serif;
+
+    color: var(--forest);
+
+    font-size: clamp(3rem, 5vw, 4.7rem);
+
+    line-height: 0.95;
+
+    font-weight: 500;
+
+    letter-spacing: -0.03em;
+
+    margin: 0 0 25px;
+}
+
+.gear-description {
+    color: var(--muted);
+
+    font-size: 0.98rem;
+
+    line-height: 1.8;
+
+    max-width: 480px;
+
+    margin: 0 0 32px;
+}
+
+
+
+/* =========================
+   GEAR CHECKLIST
+========================= */
+
+.gear-list {
+    border-top: 1px solid #d3ccbd;
+
+    margin-bottom: 30px;
+}
+
+.gear-list-item {
+    display: flex;
+
+    align-items: center;
+
+    gap: 18px;
+
+    padding: 14px 0;
+
+    border-bottom: 1px solid #d3ccbd;
+}
+
+.gear-list-item span {
+    width: 28px;
+
+    color: var(--brown);
+
+    font-size: 0.7rem;
+
+    font-weight: 700;
+}
+
+.gear-list-item strong {
+    color: var(--forest);
+
+    font-size: 0.9rem;
+
+    font-weight: 600;
+}
+
+
+/* Link */
+
+.gear-more-link {
+    display: inline-block;
+
+    color: var(--forest);
+
+    text-decoration: none;
+
+    font-size: 0.85rem;
+
+    font-weight: 700;
+
+    padding-bottom: 8px;
+
+    border-bottom: 1px solid var(--forest);
+
+    transition: 0.25s ease;
+}
+
+.gear-more-link:hover {
+    color: var(--brown);
+
+    border-color: var(--brown);
+
+    transform: translateX(4px);
+}
+
+
+
+/* =========================================================
+   ALTERNATING ACTIVITY LAYOUT
+========================================================= */
+
+/*
+   Every second activity switches the image/content
+   position to create an editorial field-guide layout.
+*/
+
+.gear-activity-alt .gear-activity-layout {
+    grid-template-columns: 0.95fr 1.05fr;
+}
+
+.gear-activity-alt .gear-activity-image {
+    order: 2;
+}
+
+.gear-activity-alt .gear-activity-content {
+    order: 1;
+}
+
+
+
+/* =========================
+   QUOTE SECTION
+========================= */
+
+.gear-quote {
+    background: var(--brown);
+
+    padding: 110px 20px;
+
+    color: white;
+
+    text-align: center;
+}
+
+.gear-quote-content {
+    max-width: 850px;
+
+    margin: 0 auto;
+}
+
+.gear-quote .eyebrow {
+    color: #e2d4bb;
+
+    margin-bottom: 18px;
+}
+
+.gear-quote h2 {
+    font-family: "Playfair Display", serif;
+
+    font-size: clamp(2.6rem, 5vw, 4.5rem);
+
+    line-height: 1.05;
+
+    font-weight: 500;
+
+    margin: 0 0 25px;
+}
+
+.gear-quote p:last-child {
+    max-width: 600px;
+
+    margin: 0 auto;
+
+    color: rgba(255,255,255,0.75);
+
+    line-height: 1.7;
+}
+
+
+
+/* =========================
+   FINAL CTA
+========================= */
+
+.gear-final-cta {
+    background: var(--forest-dark);
+
+    padding: 120px 20px;
+
+    color: white;
+}
+
+.gear-final-cta-content {
+    max-width: 850px;
+}
+
+.gear-final-cta .eyebrow {
+    color: #cfc1a7;
+
+    margin-bottom: 18px;
+}
+
+.gear-final-cta h2 {
+    font-family: "Playfair Display", serif;
+
+    font-size: clamp(3rem, 6vw, 5.5rem);
+
+    line-height: 0.95;
+
+    font-weight: 500;
+
+    margin: 0 0 25px;
+
+    letter-spacing: -0.03em;
+}
+
+.gear-final-cta p:not(.eyebrow) {
+    max-width: 550px;
+
+    color: rgba(255,255,255,0.68);
+
+    line-height: 1.8;
+
+    margin: 0 0 35px;
+}
+
+
+
+/* =========================
+   LIGHT BUTTON
+========================= */
+
+.btn-light {
+    display: inline-block;
+
+    background: var(--cream);
+
+    color: var(--forest);
+
+    text-decoration: none;
+
+    padding: 15px 24px;
+
+    font-size: 0.8rem;
+
+    font-weight: 700;
+
+    transition: 0.25s ease;
+}
+
+.btn-light:hover {
+    background: white;
+
+    transform: translateY(-2px);
+}
+
+
+
+/* =========================
+   GEAR MOBILE
+========================= */
+
+@media (max-width: 900px) {
+
+    .gear-intro-grid {
+        grid-template-columns: 1fr;
+
+        gap: 45px;
+    }
+
+
+    .gear-activity-nav {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .gear-activity-link:nth-child(2n) {
+        border-right: none;
+    }
+
+
+    .gear-activity-layout,
+    .gear-activity-alt .gear-activity-layout {
+        grid-template-columns: 1fr;
+
+        gap: 50px;
+    }
+
+    .gear-activity-image {
+        order: 1 !important;
+
+        height: 500px;
+    }
+
+    .gear-activity-content {
+        order: 2 !important;
+
+        max-width: 650px;
+    }
+
+}
+
+
+
+@media (max-width: 768px) {
+
+    .gear-page-hero {
+        min-height: 520px;
+
+        padding: 110px 20px 70px;
+    }
+
+    .gear-hero-content h1 {
+        font-size: clamp(3.2rem, 13vw, 5rem);
+    }
+
+
+    .gear-intro {
+        padding: 80px 0;
+    }
+
+
+    .gear-activities {
+        padding: 80px 0;
+    }
+
+    .gear-activities-heading {
+        margin-bottom: 40px;
+    }
+
+
+    .gear-activity-section {
+        padding: 80px 0;
+    }
+
+    .gear-activity-image {
+        height: 420px;
+    }
+
+
+    .gear-quote {
+        padding: 85px 20px;
+    }
+
+
+    .gear-final-cta {
+        padding: 90px 20px;
+    }
+
+}
+
+
+
+@media (max-width: 550px) {
+
+    .gear-activity-nav {
+        grid-template-columns: 1fr;
+    }
+
+    .gear-activity-link {
+        border-right: none;
+
+        border-bottom: 1px solid rgba(255,255,255,0.18);
+    }
+
+    .gear-activity-link:first-child {
+        border-left: none;
+    }
+
+
+    .gear-activity-image {
+        height: 350px;
+    }
+
+
+    .gear-activity-content h2 {
+        font-size: 3rem;
+    }
+
+
+    .gear-intro h2 {
+        font-size: 3.2rem;
+    }
+
+
+    .gear-quote h2 {
+        font-size: 2.5rem;
+    }
+
+
+    .gear-final-cta h2 {
+        font-size: 3.2rem;
+    }
+
+}
