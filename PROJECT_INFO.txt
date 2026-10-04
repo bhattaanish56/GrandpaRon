@@ -1,0 +1,294 @@
+================================================================================
+                      GRANDPA RON ADVENTURES - PROJECT INFO
+================================================================================
+
+PROJECT OVERVIEW
+================================================================================
+Website Name: Grandpa Ron Adventures
+Tagline: "Go Anywhere. Together."
+Purpose: Share outdoor skills, survival knowledge, and adventures from a lifetime
+         of outdoor exploration by a couple in their late 60s
+
+Project Status: Mockup/Development version
+
+================================================================================
+PAGES & NAVIGATION
+================================================================================
+
+Main Navigation Menu:
+  1. Home (index.html) - Landing page
+  2. Skills (skills.html) - Survival skills hub
+  3. Videos (videos.html) - Video content
+  4. Adventures (adventures.html) - Journal/stories
+  5. About (about.html) - "Our Story" page
+  6. Gear (gear.html) - Equipment/gear guide
+
+Additional Pages:
+  - fire.html - Fire building skills
+  - fishing.html - Fishing techniques
+  - hunting.html - Hunting knowledge
+  - camping.html - Camping guide
+
+================================================================================
+WEBSITE STRUCTURE
+================================================================================
+
+HOME PAGE (index.html) SECTIONS:
+
+1. HERO SECTION
+   - Full-width video background (hero.mp4) with fallback
+   - Overlay effect
+   - Headline: "Go Anywhere. Together."
+   - Tagline: "Real skills. Real adventures."
+   - CTA: "Watch Our Story" button with play icon
+   - Scroll indicator
+
+2. ABOUT SECTION
+   - Title: "Meet Grandpa Ron"
+   - Description of the couple (late 60s) and their outdoor experiences
+   - CTA: "Our Story" button linking to about.html
+   - Features logo image
+
+3. SKILLS SECTION
+   - Title: "Explore Our Survival Skills"
+   - 4 Featured Skill Cards (numbered 01-04):
+     a) Fire - "Learn how to start and maintain a fire in different conditions"
+     b) Fishing - "Tips, techniques and equipment learned from years on the water"
+     c) Hunting - "Preparation, field knowledge and outdoor experience"
+     d) Camping - "Set up camp, stay prepared, and enjoy the outdoors"
+   - Each card links to individual skill pages
+   - "View All Skills" button to full skills page
+
+4. FEATURED VIDEO SECTION
+   - Title: "A Day on the Water"
+   - Video thumbnail with play button overlay
+   - Description of paddling and fishing adventure
+   - CTA: "Watch Videos" button
+
+5. JOURNAL SECTION
+   - Title: "Stories from the Road"
+   - 3 Featured Journal Cards:
+     a) "Our Favorite Fishing Spot" (ADVENTURE tag)
+     b) "What We Keep in Our Canoe" (CANOEING tag)
+     c) "A Winter Camping Experience" (CAMPING tag)
+   - "View All" link to adventures.html
+
+6. FINAL CTA SECTION
+   - Title: "Come Adventure With Us"
+   - Tagline: "New skills. New places. Same team."
+   - Button: "Start Exploring"
+
+7. FOOTER
+   - Brand/logo with tagline
+   - 4 Column Layout:
+     a) Explore (Skills, Videos, Adventures, Gear)
+     b) About (Our Story, Contact)
+     c) Follow Along (Instagram, YouTube, Facebook)
+   - Copyright: © 2026 Grandpa Ron
+   - Tagline: "Go anywhere. Together."
+
+================================================================================
+DESIGN SYSTEM
+================================================================================
+
+COLOR PALETTE:
+  Primary (Forest Green):
+    - --forest: #18392c (main forest green)
+    - --forest-dark: #0e281e (darker shade)
+    - --forest-light: #315542 (lighter shade)
+
+  Secondary (Cream):
+    - --cream: #eee6d4 (main cream)
+    - --cream-light: #f7f2e7 (lighter cream)
+
+  Accent (Brown):
+    - --brown: #79573f (main brown)
+    - --brown-dark: #503927 (darker brown)
+
+  Text:
+    - --text: #1c3329 (primary text - dark)
+    - --muted: #777467 (secondary text - muted)
+
+  Background:
+    - --white: #ffffff
+    - Body background: cream-light
+
+TYPOGRAPHY:
+  Primary Font: "DM Sans" (sans-serif)
+    - Font weights: 400, 500, 600, 700
+    - Used for body text and most headings
+
+  Secondary Font: "Playfair Display" (serif)
+    - Font weights: 500, 600, 700
+    - Used for section titles (large display headings)
+
+  Title Styling:
+    - Font size: clamp(40px, 5vw, 62px) - responsive sizing
+    - Line height: 1.05
+
+SPACING & LAYOUT:
+  - Max container width: 1200px
+  - Section padding: 120px (vertical)
+  - Container width: min(90%, 1200px) - responsive with max 90% margin
+
+INTERACTIVE ELEMENTS:
+  - Primary buttons ("Our Story", "Watch Videos", "Start Exploring")
+  - Light buttons ("View All Skills", secondary CTAs)
+  - Story button (with play icon)
+  - Card links with hover state ("Explore →", "Read More →")
+
+================================================================================
+ASSETS
+================================================================================
+
+Image Assets (18 total files - 193.0K each):
+  - logo.png - Brand logo
+  - featured.jpg - Featured video thumbnail
+  - hero-fallback.jpg - Hero section fallback image
+
+  Skill Images:
+    - fire.jpg - Fire building
+    - fishing.jpg - Fishing
+    - hunting.jpg - Hunting
+    - camping.jpg - Camping
+
+  Journal/Story Images:
+    - journal-1.jpg - Fishing adventure
+    - journal-2.jpg - Canoe adventure
+    - journal-3.jpg - Camping adventure
+
+  Additional Images:
+    - a.jpg, e.jpg, one.jpg - Various content images
+    - adventure.jpg, couple.jpg, outdoor.jpg - Lifestyle images
+    - gear-hero.jpg - Gear section hero
+    - main.jpg - Main content image
+    - video.jpg - Video placeholder
+
+Media Files:
+  - hero.mp4 - Hero section background video (referenced but not in assets)
+
+================================================================================
+INTERACTIVE FEATURES
+================================================================================
+
+JAVASCRIPT FUNCTIONALITY (script.js):
+
+1. Navigation Scrolling Effect
+   - Navbar changes appearance when page scrolls > 60px
+   - Adds "scrolled" class to navbar element
+   - Smooths scroll behavior with CSS
+
+2. Mobile Menu Toggle
+   - Hamburger menu button toggles mobile menu visibility
+   - Mobile menu slides in/out on smaller screens
+   - Same navigation links as desktop menu
+
+3. Search Functionality (Placeholder)
+   - Search button currently shows alert
+   - "Search will be added later" message
+
+================================================================================
+RESPONSIVE DESIGN
+================================================================================
+
+- Mobile menu for smaller screens (hidden hamburger toggle)
+- Responsive typography using CSS clamp() for fluid sizing
+- Flexible grid layouts
+- Mobile-first approach evident from component structure
+
+================================================================================
+FONTS & EXTERNAL RESOURCES
+================================================================================
+
+Google Fonts:
+  - Preconnect: https://fonts.googleapis.com
+  - Preconnect: https://fonts.gstatic.com
+  - Font families: DM Sans, Playfair Display
+
+CSS Files:
+  - style.css (45.3K)
+
+JavaScript Files:
+  - script.js (934B)
+
+================================================================================
+METADATA & SEO
+================================================================================
+
+Meta Title: "Grandpa Ron | Go Anywhere. Together."
+Meta Description: "Outdoor skills, survival knowledge and adventures from Grandpa Ron."
+Language: English (en)
+Viewport: Device width with initial scale 1.0
+Character Set: UTF-8
+
+================================================================================
+FILE STRUCTURE
+================================================================================
+
+/Grandpa-Ron-Mockup-/
+├── index.html (14.1K) - Home page
+├── about.html (7.9K) - About page
+├── adventures.html (8.4K) - Adventures/journal page
+├── skills.html (5.1K) - Skills hub
+├── videos.html (5.8K) - Videos page
+├── gear.html (17.8K) - Gear guide
+├── fire.html (4.1K) - Fire building skill
+├── fishing.html (4.0K) - Fishing skill
+├── hunting.html (4.2K) - Hunting skill
+├── camping.html (4.2K) - Camping skill
+├── style.css (45.3K) - Main stylesheet
+├── script.js (934B) - JavaScript functionality
+├── .gitignore (182B)
+└── assets/ - Image and media folder
+    ├── logo.png
+    ├── featured.jpg
+    ├── fire.jpg, fishing.jpg, hunting.jpg, camping.jpg
+    ├── journal-1.jpg, journal-2.jpg, journal-3.jpg
+    ├── a.jpg, e.jpg, one.jpg
+    ├── adventure.jpg, couple.jpg, outdoor.jpg
+    ├── gear-hero.jpg
+    ├── main.jpg
+    └── video.jpg
+
+================================================================================
+KEY CONTENT THEMES
+================================================================================
+
+1. Outdoor Skills Focus
+   - Fire building & safety
+   - Fishing techniques
+   - Hunting knowledge
+   - Camping preparation
+
+2. Adventure & Storytelling
+   - Real experiences from couple's life
+   - Journal entries about specific adventures
+   - Video storytelling
+
+3. Practical Knowledge
+   - Step-by-step guides
+   - Equipment lists
+   - Tips and tricks
+   - Survival knowledge
+
+4. Community & Connection
+   - "Together" theme throughout
+   - Sharing knowledge with others
+   - Lifetime of learning
+
+================================================================================
+NEXT STEPS / NOTES
+================================================================================
+
+- Search functionality needs to be implemented
+- Some pages are created but content needs to be expanded (skills.html,
+  about.html, etc.)
+- Videos need to be added/integrated
+- Contact form/email functionality may need to be added
+- Social media links need proper URLs
+- Mobile responsiveness may need fine-tuning
+- Performance optimization (large image files at 193K each)
+
+================================================================================
+Generated: 2026-10-04
+================================================================================
