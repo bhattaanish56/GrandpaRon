@@ -1,3 +1,15 @@
+/* ================= VIDEO CONFIGURATION ================= */
+/* EDITABLE: Update these YouTube video IDs to change site videos */
+const VIDEOS = {
+    featured: 'iys_pmJSp9M',
+    fishing: '6FJ-kY7TNA0',
+    camping: 'nQdXp6HKKik',
+    hunting: 'ZgSdKNi6LTU',
+    fire: 'U_LlX4t0A9I',
+    extra1: 'FtdIcmgfy_w',
+    extra2: 'p9yaDeStS7A'
+};
+
 /* ================= NAVIGATION ================= */
 
 const navbar = document.getElementById("navbar");
@@ -73,3 +85,52 @@ if (searchButton) {
     });
 
 }
+
+
+/* ================= VIDEO MODAL ================= */
+
+function createVideoModal() {
+    const modal = document.createElement('div');
+    modal.className = 'video-modal';
+    modal.innerHTML = `
+        <div class="video-modal-overlay"></div>
+        <div class="video-modal-content">
+            <button class="video-modal-close" aria-label="Close video">&times;</button>
+            <div class="video-modal-player"></div>
+        </div>
+    `;
+    document.body.appendChild(modal);
+    return modal;
+}
+
+function openVideoModal(videoId) {
+    let modal = document.querySelector('.video-modal');
+    if (!modal) {
+        modal = createVideoModal();
+    }
+
+    const player = modal.querySelector('.video-modal-player');
+    player.innerHTML = `<iframe src="https://www.youtube.com/embed/${videoId}?autoplay=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+
+    const closeModal = () => {
+        modal.classList.remove('active');
+        document.body.style.overflow = '';
+        player.innerHTML = '';
+    };
+
+    modal.querySelector('.video-modal-close').onclick = closeModal;
+    modal.querySelector('.video-modal-overlay').onclick = closeModal;
+}
+
+// Attach video modal to all video triggers
+document.addEventListener('click', (e) => {
+    const trigger = e.target.closest('[data-video-id]');
+    if (trigger) {
+        e.preventDefault();
+        const videoId = trigger.dataset.videoId;
+        openVideoModal(videoId);
+    }
+});

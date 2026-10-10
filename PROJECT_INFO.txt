@@ -61,7 +61,8 @@ HOME PAGE (index.html) SECTIONS:
 
 4. FEATURED VIDEO SECTION
    - Title: "A Day on the Water"
-   - Video thumbnail with play button overlay
+   - Video thumbnail with play button overlay (data-video-id: iys_pmJSp9M)
+   - Clicking opens YouTube modal with embedded playback
    - Description of paddling and fishing adventure
    - CTA: "Watch Videos" button
 
@@ -173,17 +174,29 @@ INTERACTIVE FEATURES
 
 JAVASCRIPT FUNCTIONALITY (script.js):
 
-1. Navigation Scrolling Effect
+1. Video Configuration (NEW)
+   - Centralized VIDEOS object stores all YouTube video IDs
+   - Marked with EDITABLE comment for easy updates
+   - 7 videos configured: featured, fishing, camping, hunting, fire, extra1, extra2
+
+2. Video Modal System (NEW)
+   - YouTube embedded playback directly on site
+   - Modal overlay with autoplay functionality
+   - Close via button or overlay click
+   - Responsive video player (16:9 aspect ratio)
+   - All video cards use data-video-id attribute
+
+3. Navigation Scrolling Effect
    - Navbar changes appearance when page scrolls > 60px
    - Adds "scrolled" class to navbar element
    - Smooths scroll behavior with CSS
 
-2. Mobile Menu Toggle
+4. Mobile Menu Toggle
    - Hamburger menu button toggles mobile menu visibility
    - Mobile menu slides in/out on smaller screens
    - Same navigation links as desktop menu
 
-3. Search Functionality (Placeholder)
+5. Search Functionality (Placeholder)
    - Search button currently shows alert
    - "Search will be added later" message
 
@@ -283,12 +296,25 @@ NEXT STEPS / NOTES
 - Search functionality needs to be implemented
 - Some pages are created but content needs to be expanded (skills.html,
   about.html, etc.)
-- Videos need to be added/integrated
+- ✓ Videos integrated with YouTube embeds and modal playback (7 videos)
+- ✓ Centralized video configuration in script.js for easy updates
 - Contact form/email functionality may need to be added
 - Social media links need proper URLs
 - Mobile responsiveness may need fine-tuning
 - Performance optimization (large image files at 193K each)
 
+RECENT UPDATES
+================================================================================
+2026-10-10:
+- Added YouTube video integration with 7 videos across site
+- Implemented modal video player with embedded YouTube playback
+- Created centralized VIDEOS configuration object in script.js
+- Updated videos.html with all 7 video cards (adventure, tutorials, short clips)
+- Updated featured video section on homepage with YouTube embed
+- Added video modal CSS with responsive design
+- Fixed navigation typos in index.html
+
 ================================================================================
 Generated: 2026-10-04
+Updated: 2026-10-10
 ================================================================================
