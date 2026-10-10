@@ -2,42 +2,6 @@
                       GRANDPA RON ADVENTURES - PROJECT INFO
 ================================================================================
 
-
-# Project Development Rules
-
-## Before coding
-- Inspect the existing project structure and understand the current stack.
-- Read the relevant files before changing them.
-- Make a short plan for complex changes.
-
-## Code quality
-- Prefer simple, maintainable, production-ready code.
-- Reuse existing components and patterns.
-- Avoid unnecessary dependencies and duplicated code.
-- Never replace working features without a reason.
-- Never hardcode API keys, passwords, or secrets.
-
-## Frontend
-- Build responsive layouts for mobile, tablet, and desktop.
-- Use a consistent design system and accessible components.
-- Include loading, empty, error, and success states where appropriate.
-- Do not invent customer reviews, credentials, or business claims.
-
-## Testing
-- Run the relevant tests, build, and lint commands when available.
-- For websites, test important flows in a browser when possible.
-- Verify fixes rather than claiming success without evidence.
-- Report remaining issues and any checks that could not be run.
-
-## Git safety
-- Inspect the diff before committing.
-- Never delete user work or overwrite unrelated changes.
-- Never commit or push unless explicitly asked.
-
-
-
-
-
 PROJECT OVERVIEW
 ================================================================================
 Website Name: Grandpa Ron Adventures
