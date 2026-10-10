@@ -1543,6 +1543,8 @@ footer {
 .library-video-card {
     min-width: 0;
     transition: transform 0.3s ease;
+    border-radius: 14px;
+    overflow: hidden;
 }
 
 .library-video-card.selected {
@@ -1566,6 +1568,10 @@ footer {
     background: var(--forest);
 
     text-decoration: none;
+
+    cursor: pointer;
+
+    border-radius: 14px;
 }
 
 .library-video-image img {
@@ -1584,6 +1590,7 @@ footer {
     height: 100%;
     border: 0;
     display: block;
+    pointer-events: none;
 }
 
 .library-video-image:hover img {
@@ -1677,9 +1684,131 @@ footer {
 }
 
 
-/* ========================================
-   ADVENTURES PAGE
-======================================== */
+/* VIDEO PLAYER MODAL */
+
+.video-player-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 2000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.video-player-modal.active {
+    display: flex;
+}
+
+.video-player-modal.closing .video-modal-backdrop {
+    animation: fadeOutBackdrop 0.3s ease forwards;
+}
+
+.video-player-modal.closing .video-modal-container {
+    animation: slideOutModal 0.3s ease forwards;
+}
+
+.video-modal-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.85);
+    animation: fadeInBackdrop 0.3s ease forwards;
+}
+
+.video-modal-container {
+    position: relative;
+    z-index: 2001;
+    width: min(90vw, 800px);
+    aspect-ratio: 16 / 9;
+    background: var(--forest);
+    border-radius: 16px;
+    overflow: hidden;
+    animation: slideInModal 0.3s ease forwards;
+}
+
+@keyframes slideInModal {
+    from {
+        opacity: 0;
+        transform: scale(0.85);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes slideOutModal {
+    from {
+        opacity: 1;
+        transform: scale(1);
+    }
+    to {
+        opacity: 0;
+        transform: scale(0.85);
+    }
+}
+
+@keyframes fadeInBackdrop {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeOutBackdrop {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .video-modal-backdrop,
+    .video-modal-container,
+    .video-player-modal.closing .video-modal-backdrop,
+    .video-player-modal.closing .video-modal-container {
+        animation: none !important;
+    }
+}
+
+.video-modal-player {
+    width: 100%;
+    height: 100%;
+}
+
+.video-modal-player iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+    display: block;
+}
+
+.video-modal-close {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    z-index: 2002;
+    width: 40px;
+    height: 40px;
+    border: none;
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    font-size: 28px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s ease;
+}
+
+.video-modal-close:hover {
+    background: rgba(0, 0, 0, 0.8);
+}
 
 .adventure-container {
     width: min(1100px, 90%);
