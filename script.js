@@ -87,50 +87,34 @@ if (searchButton) {
 }
 
 
-/* ================= VIDEO MODAL ================= */
+/* ================= VIDEO CARD SELECTION (videos.html) ================= */
 
-function createVideoModal() {
-    const modal = document.createElement('div');
-    modal.className = 'video-modal';
-    modal.innerHTML = `
-        <div class="video-modal-overlay"></div>
-        <div class="video-modal-content">
-            <button class="video-modal-close" aria-label="Close video">&times;</button>
-            <div class="video-modal-player"></div>
-        </div>
-    `;
-    document.body.appendChild(modal);
-    return modal;
-}
-
-function openVideoModal(videoId) {
-    let modal = document.querySelector('.video-modal');
-    if (!modal) {
-        modal = createVideoModal();
-    }
-
-    const player = modal.querySelector('.video-modal-player');
-    player.innerHTML = `<iframe src="https://www.youtube.com/embed/${videoId}?autoplay=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
-
-    modal.classList.add('active');
-    document.body.style.overflow = 'hidden';
-
-    const closeModal = () => {
-        modal.classList.remove('active');
-        document.body.style.overflow = '';
-        player.innerHTML = '';
-    };
-
-    modal.querySelector('.video-modal-close').onclick = closeModal;
-    modal.querySelector('.video-modal-overlay').onclick = closeModal;
-}
-
-// Attach video modal to all video triggers
 document.addEventListener('click', (e) => {
-    const trigger = e.target.closest('[data-video-id]');
-    if (trigger) {
-        e.preventDefault();
-        const videoId = trigger.dataset.videoId;
-        openVideoModal(videoId);
+    const trigger = e.target.closest('.library-video-image');
+    if (!trigger) return;
+
+    const card = trigger.closest('.library-video-card');
+    if (!card) return;
+
+    e.preventDefault();
+
+    // Remove selected class and autoplay from all other cards
+    document.querySelectorAll('.library-video-card.selected').forEach((c) => {
+        if (c === card) return;
+        c.classList.remove('selected');
+        const oldIframe = c.querySelector('iframe');
+        if (oldIframe) {
+            let src = oldIframe.src;
+            src = src.replace(/[?&]autoplay=1/g, '').replace(/[?&]mute=1/g, '');
+            src = src.replace(/[?&]+$/, '');
+            oldIframe.src = src;
+        }
+    });
+
+    // Add selected class to clicked card and enable autoplay on its iframe
+    card.classList.add('selected');
+    const iframe = card.querySelector('iframe');
+    if (iframe && !iframe.src.includes('autoplay=1')) {
+        iframe.src += (iframe.src.includes('?') ? '&' : '?') + 'autoplay=1&mute=1';
     }
 });
