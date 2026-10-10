@@ -97,9 +97,18 @@ button {
     height: 84px;
     z-index: 1000;
 
+    background: transparent;
     color: white;
 
-    transition: .4s ease;
+    border-radius: 0 0 14px 14px;
+
+    transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease, backdrop-filter 0.3s ease, transform 0.4s ease-in-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .navbar {
+        transition: none;
+    }
 }
 
 
@@ -109,6 +118,16 @@ button {
     backdrop-filter: blur(15px);
 
     box-shadow: 0 5px 25px rgba(0,0,0,.08);
+}
+
+.navbar.hidden {
+    transform: translateY(-100%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .navbar.hidden {
+        transform: none;
+    }
 }
 
 
