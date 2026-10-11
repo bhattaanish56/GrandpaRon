@@ -71,6 +71,32 @@ if (menuButton) {
 
 }
 
+// Close mobile menu when clicking a link
+if (mobileMenu) {
+    const menuLinks = mobileMenu.querySelectorAll("a");
+    menuLinks.forEach(link => {
+        link.addEventListener("click", () => {
+            mobileMenu.classList.remove("active");
+        });
+    });
+}
+
+// Close mobile menu when clicking outside
+document.addEventListener("click", (e) => {
+    if (mobileMenu && mobileMenu.classList.contains("active")) {
+        if (!mobileMenu.contains(e.target) && !menuButton.contains(e.target)) {
+            mobileMenu.classList.remove("active");
+        }
+    }
+});
+
+// Close mobile menu on Escape key
+document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && mobileMenu && mobileMenu.classList.contains("active")) {
+        mobileMenu.classList.remove("active");
+    }
+});
+
 
 /* ================= SEARCH ================= */
 

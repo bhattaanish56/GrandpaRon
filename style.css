@@ -248,7 +248,7 @@ button {
     width: 40px;
     height: 40px;
 
-    border: 2px solid var(--forest);
+    border: 2px solid rgba(255,255,255,.4);
     border-radius: 50%;
 
     background: transparent;
@@ -264,6 +264,10 @@ button {
     transition: all 0.3s ease;
 
     color: inherit;
+}
+
+.navbar.scrolled .search-button {
+    border-color: var(--forest);
 }
 
 
@@ -1148,6 +1152,10 @@ footer {
     .journal-grid {
         grid-template-columns: repeat(2,1fr);
     }
+
+    .featured-media {
+        height: 380px;
+    }
 }
 
 
@@ -1173,9 +1181,17 @@ footer {
         font-size: 57px;
     }
 
+    .hero-actions {
+        flex-wrap: wrap;
+    }
+
     .skills-grid,
     .journal-grid {
         grid-template-columns: 1fr;
+    }
+
+    .skill-image-wrapper {
+        height: 240px;
     }
 
     .journal-header {
@@ -1199,6 +1215,10 @@ footer {
         gap: 40px;
     }
 
+    .logo img {
+        height: 45px;
+    }
+
     .footer-grid {
         grid-template-columns: 1fr;
     }
@@ -1206,6 +1226,33 @@ footer {
     .footer-bottom {
         flex-direction: column;
         gap: 10px;
+    }
+}
+
+@media(max-width:400px) {
+
+    .scroll-indicator {
+        display: none;
+    }
+
+    .hero-actions {
+        font-size: 12px;
+    }
+
+    .story-button {
+        width: 52px;
+        height: 52px;
+    }
+}
+
+@media(max-height:600px) and (orientation: landscape) {
+
+    .scroll-indicator {
+        display: none;
+    }
+
+    .hero {
+        min-height: 500px;
     }
 }
 
