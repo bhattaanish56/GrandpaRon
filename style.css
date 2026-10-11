@@ -245,10 +245,10 @@ button {
 
 
 .search-button {
-    width: 18px;
-    height: 18px;
+    width: 40px;
+    height: 40px;
 
-    border: 1.5px solid currentColor;
+    border: 2px solid var(--forest);
     border-radius: 50%;
 
     background: transparent;
@@ -256,6 +256,31 @@ button {
     position: relative;
 
     cursor: pointer;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    transition: all 0.3s ease;
+
+    color: inherit;
+}
+
+
+.search-button::before {
+    content: "";
+
+    position: absolute;
+
+    width: 18px;
+    height: 18px;
+
+    border: 2px solid currentColor;
+    border-radius: 50%;
+
+    background: transparent;
+
+    transition: inherit;
 }
 
 
@@ -265,14 +290,34 @@ button {
     position: absolute;
 
     width: 7px;
-    height: 1.5px;
+    height: 2px;
 
     background: currentColor;
 
-    right: -5px;
-    bottom: -2px;
+    right: 7px;
+    bottom: 7px;
 
     transform: rotate(45deg);
+
+    z-index: 1;
+
+    transition: inherit;
+}
+
+
+.search-button:hover {
+    opacity: 0.7;
+}
+
+
+.search-button:active {
+    transform: scale(0.95);
+}
+
+
+.search-button:focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 3px;
 }
 
 
