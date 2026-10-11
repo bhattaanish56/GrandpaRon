@@ -33,7 +33,7 @@ html {
 
 
 body {
-    font-family: "DM Sans", sans-serif;
+    font-family: "Inter", sans-serif;
     background: var(--cream-light);
     color: var(--text);
     overflow-x: hidden;
@@ -80,7 +80,7 @@ button {
 
 
 .section-title {
-    font-family: "Playfair Display", serif;
+    font-family: "Inria Serif", serif;
     font-size: clamp(40px, 5vw, 62px);
     line-height: 1.05;
     font-weight: 600;
@@ -331,7 +331,7 @@ button {
 
 
 .mobile-menu a {
-    font-family: "Playfair Display", serif;
+    font-family: "Inter", sans-serif;
     font-size: 20px;
 }
 
@@ -402,7 +402,7 @@ button {
 
 
 .hero h1 {
-    font-family: "Playfair Display", serif;
+    font-family: "Inria Serif", serif;
 
     font-size: clamp(60px,8vw,110px);
 
@@ -680,7 +680,7 @@ button {
 
 
 .skill-content h3 {
-    font-family: "Playfair Display", serif;
+    font-family: "Inria Serif", serif;
 
     font-size: 27px;
 
@@ -868,7 +868,7 @@ button {
 
 
 .journal-card h3 {
-    font-family: "Playfair Display",serif;
+    font-family: "Inria Serif",serif;
 
     font-size: 24px;
 
@@ -939,7 +939,7 @@ button {
 
 
 .final-cta-content h2 {
-    font-family: "Playfair Display",serif;
+    font-family: "Inria Serif",serif;
 
     font-size: clamp(52px,7vw,85px);
 
@@ -961,60 +961,98 @@ button {
 /* ================= FOOTER ================= */
 
 footer {
-    background: var(--forest-dark);
-    color: rgb(255, 255, 255);
-    padding: 50px 0 25px;
+    background: #032509;
+    padding: 56px 0 62px;
 }
 
 .footer-grid {
     display: grid;
     grid-template-columns: 1.5fr 1fr 1fr 1fr;
-    gap: 50px;
+    gap: 80px;
     padding-bottom: 40px;
-    border-bottom: 1px solid rgba(255,255,255,.13);
+    border-bottom: 1px solid #2a4a2e;
+}
+
+.footer-brand {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.footer-brand .logo {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+}
+
+.footer-brand .logo img {
+    width: 52px;
+    height: 45px;
+}
+
+.footer-brand .logo-name {
+    display: none;
+}
+
+.footer-brand h5 {
+    font-family: "Inria Serif", serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 1.3px;
+    text-transform: uppercase;
+    color: #f2eee4;
+    margin: 0;
 }
 
 .footer-brand p {
-    max-width: 290px;
-    color: rgba(255,255,255,.5);
+    max-width: 280px;
+    color: #b8b09a;
     font-size: 13px;
-    line-height: 1.7;
-    margin-top: 15px;
+    line-height: 1.5;
+    margin: 0;
+    font-family: "Inter", sans-serif;
 }
 
-/* Make links horizontal */
 .footer-column {
     display: flex;
-    flex-direction: row;
-    align-items: center;
+    flex-direction: column;
     gap: 20px;
-    flex-wrap: wrap;
 }
 
 .footer-column h4 {
-    font-size: 10px;
-    letter-spacing: 2px;
+    font-family: "Inria Serif", serif;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 1.12px;
     text-transform: uppercase;
+    color: #f2eee4;
     margin: 0;
-    width: 100%;
 }
 
 .footer-column a {
+    font-family: "Inter", sans-serif;
     font-size: 13px;
-    color: rgba(255,255,255,.55);
+    color: #c8bfa8;
+    text-decoration: none;
     transition: .2s ease;
 }
 
 .footer-column a:hover {
-    color: white;
+    color: #f2eee4;
 }
 
 .footer-bottom {
     padding-top: 20px;
     display: flex;
     justify-content: space-between;
-    color: rgba(255,255,255,.35);
-    font-size: 10px;
+    align-items: center;
+    color: #7a7060;
+    font-size: 12px;
+}
+
+.footer-bottom span:last-child {
+    font-family: "Inria Serif", serif;
+    font-style: italic;
 }
 
 
@@ -1045,6 +1083,7 @@ footer {
 
     .footer-grid {
         grid-template-columns: repeat(2,1fr);
+        gap: 40px;
     }
 }
 
@@ -1158,7 +1197,7 @@ footer {
 }
 
 .skill-card h3 {
-    font-family: "Playfair Display", serif;
+    font-family: "Inria Serif", serif;
     font-size: 2.2rem;
     color: var(--forest);
     margin: 0 0 10px;
@@ -1203,7 +1242,7 @@ footer {
 }
 
 .skill-hero h1 {
-    font-family: "Playfair Display", serif;
+    font-family: "Inria Serif", serif;
     font-size: clamp(3.5rem, 7vw, 6.5rem);
     line-height: 0.95;
     margin: 10px 0 25px;
@@ -1232,7 +1271,7 @@ footer {
 }
 
 .skill-video .section-heading h2 {
-    font-family: "Playfair Display", serif;
+    font-family: "Inria Serif", serif;
     font-size: clamp(2.3rem, 4vw, 3.5rem);
     color: var(--forest);
     margin: 10px 0 0;
@@ -1272,7 +1311,7 @@ footer {
 
 .content-grid h2,
 .content-narrow h2 {
-    font-family: "Playfair Display", serif;
+    font-family: "Inria Serif", serif;
     font-size: 3rem;
     color: var(--forest);
     margin: 10px 0 20px;
@@ -1317,7 +1356,7 @@ footer {
 }
 
 .check-item span {
-    font-family: "Playfair Display", serif;
+    font-family: "Inria Serif", serif;
     font-size: 1.1rem;
     color: var(--brown);
 }
@@ -1355,7 +1394,7 @@ footer {
 }
 
 .tip-box h2 {
-    font-family: "Playfair Display", serif;
+    font-family: "Inria Serif", serif;
     font-size: clamp(2rem, 4vw, 3.2rem);
     line-height: 1.2;
     margin: 15px 0;
@@ -1444,7 +1483,7 @@ footer {
 }
 
 .video-hero-content h1 {
-    font-family: "Playfair Display", serif;
+    font-family: "Inria Serif", serif;
 
     font-size: clamp(3rem, 6vw, 5.5rem);
 
@@ -1503,7 +1542,7 @@ footer {
 
     border-radius: 30px;
 
-    font-family: "DM Sans", sans-serif;
+    font-family: "Inter", sans-serif;
 
     font-size: .8rem;
 
@@ -1642,7 +1681,7 @@ footer {
 }
 
 .library-video-info h3 {
-    font-family: "Playfair Display", serif;
+    font-family: "Inria Serif", serif;
 
     font-size: 1.25rem;
 
@@ -1850,7 +1889,7 @@ footer {
 }
 
 .adventure-hero-content h1 {
-    font-family: "Playfair Display", serif;
+    font-family: "Inria Serif", serif;
 
     font-size: clamp(3.5rem, 7vw, 6rem);
 
@@ -1889,7 +1928,7 @@ footer {
 }
 
 .adventure-heading h2 {
-    font-family: "Playfair Display", serif;
+    font-family: "Inria Serif", serif;
 
     color: var(--forest);
 
@@ -1982,7 +2021,7 @@ footer {
 }
 
 .adventure-section-heading h2 {
-    font-family: "Playfair Display", serif;
+    font-family: "Inria Serif", serif;
 
     color: var(--forest);
 
@@ -2056,7 +2095,7 @@ footer {
 }
 
 .adventure-card h3 {
-    font-family: "Playfair Display", serif;
+    font-family: "Inria Serif", serif;
 
     font-size: 1.9rem;
 
@@ -2113,7 +2152,7 @@ footer {
 }
 
 .adventure-quote-content h2 {
-    font-family: "Playfair Display", serif;
+    font-family: "Inria Serif", serif;
 
     color: var(--cream-light);
 
@@ -2177,7 +2216,7 @@ footer {
 }
 
 .about-hero-content h1 {
-    font-family: "Playfair Display", serif;
+    font-family: "Inria Serif", serif;
 
     font-size: clamp(3.5rem, 7vw, 6rem);
 
@@ -2237,7 +2276,7 @@ footer {
 }
 
 .about-intro-content h2 {
-    font-family: "Playfair Display", serif;
+    font-family: "Inria Serif", serif;
 
     color: var(--forest);
 
@@ -2274,7 +2313,7 @@ footer {
 }
 
 .about-section-heading h2 {
-    font-family: "Playfair Display", serif;
+    font-family: "Inria Serif", serif;
 
     color: var(--forest);
 
@@ -2321,7 +2360,7 @@ footer {
 }
 
 .about-value span {
-    font-family: "Playfair Display", serif;
+    font-family: "Inria Serif", serif;
 
     color: var(--brown);
 
@@ -2329,7 +2368,7 @@ footer {
 }
 
 .about-value h3 {
-    font-family: "Playfair Display", serif;
+    font-family: "Inria Serif", serif;
 
     color: var(--forest);
 
@@ -2362,7 +2401,7 @@ footer {
 }
 
 .about-skills-heading h2 {
-    font-family: "Playfair Display", serif;
+    font-family: "Inria Serif", serif;
 
     color: var(--forest);
 
@@ -2444,7 +2483,7 @@ footer {
 }
 
 .about-skill h3 {
-    font-family: "Playfair Display", serif;
+    font-family: "Inria Serif", serif;
 
     font-size: 2rem;
 
@@ -2475,7 +2514,7 @@ footer {
 }
 
 .about-quote-content h2 {
-    font-family: "Playfair Display", serif;
+    font-family: "Inria Serif", serif;
 
     color: var(--cream-light);
 
@@ -2512,7 +2551,7 @@ footer {
 }
 
 .about-cta h2 {
-    font-family: "Playfair Display", serif;
+    font-family: "Inria Serif", serif;
 
     color: var(--forest);
 
@@ -2589,7 +2628,7 @@ footer {
 }
 
 .gear-hero-content h1 {
-    font-family: "Playfair Display", serif;
+    font-family: "Inria Serif", serif;
 
     font-size: clamp(3.5rem, 7vw, 6.5rem);
     line-height: 0.94;
@@ -2657,7 +2696,7 @@ footer {
 }
 
 .gear-intro h2 {
-    font-family: "Playfair Display", serif;
+    font-family: "Inria Serif", serif;
 
     color: var(--forest);
 
@@ -2677,7 +2716,7 @@ footer {
 }
 
 .gear-large-text {
-    font-family: "Playfair Display", serif;
+    font-family: "Inria Serif", serif;
 
     color: var(--forest);
 
@@ -2721,7 +2760,7 @@ footer {
 }
 
 .gear-activities-heading h2 {
-    font-family: "Playfair Display", serif;
+    font-family: "Inria Serif", serif;
 
     font-size: clamp(3rem, 5vw, 4.7rem);
 
@@ -2786,7 +2825,7 @@ footer {
 }
 
 .gear-activity-link {
-    font-family: "Playfair Display", serif;
+    font-family: "Inria Serif", serif;
 
     font-size: 1.35rem;
 }
@@ -2896,7 +2935,7 @@ footer {
 }
 
 .gear-activity-content h2 {
-    font-family: "Playfair Display", serif;
+    font-family: "Inria Serif", serif;
 
     color: var(--forest);
 
@@ -3046,7 +3085,7 @@ footer {
 }
 
 .gear-quote h2 {
-    font-family: "Playfair Display", serif;
+    font-family: "Inria Serif", serif;
 
     font-size: clamp(2.6rem, 5vw, 4.5rem);
 
@@ -3092,7 +3131,7 @@ footer {
 }
 
 .gear-final-cta h2 {
-    font-family: "Playfair Display", serif;
+    font-family: "Inria Serif", serif;
 
     font-size: clamp(3rem, 6vw, 5.5rem);
 
