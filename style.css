@@ -2462,10 +2462,37 @@ footer {
     align-items: center;
 }
 
-.about-intro-image {
-    height: 600px;
+.about-intro-content {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-areas:
+        "eyebrow"
+        "title"
+        "text";
+}
 
-    overflow: hidden;
+.about-intro-content .eyebrow {
+    grid-area: eyebrow;
+}
+
+.about-intro-content h2 {
+    grid-area: title;
+}
+
+.about-intro-image {
+    display: none;
+}
+
+.about-intro-grid::before {
+    content: '';
+    background: url('assets/couple.jpg') center/cover;
+    height: 600px;
+    grid-column: 1;
+}
+
+.about-intro-text {
+    grid-area: text;
+    max-width: 500px;
 }
 
 .about-intro-image img {
@@ -2475,10 +2502,6 @@ footer {
     object-fit: cover;
 
     display: block;
-}
-
-.about-intro-content {
-    max-width: 500px;
 }
 
 .about-intro-content h2 {
@@ -2501,6 +2524,48 @@ footer {
     font-size: 1rem;
 
     margin-bottom: 20px;
+}
+
+@media (max-width: 768px) {
+    .about-intro {
+        padding: 80px 0;
+    }
+
+    .about-intro-grid {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+
+    .about-intro-grid::before {
+        display: none;
+    }
+
+    .about-intro-content {
+        grid-template-areas:
+            "eyebrow"
+            "title"
+            "image"
+            "text";
+        padding: 0 20px;
+    }
+
+    .about-intro-image {
+        display: block;
+        grid-area: image;
+        width: 100%;
+        height: auto;
+        aspect-ratio: 3/4;
+        overflow: hidden;
+        margin: 30px 0;
+    }
+
+    .about-intro-image img {
+        object-position: top;
+    }
+
+    .about-intro-text {
+        max-width: 100%;
+    }
 }
 
 
