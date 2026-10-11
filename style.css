@@ -1144,6 +1144,10 @@ footer {
         grid-template-columns: repeat(2,1fr);
         gap: 40px;
     }
+
+    .about-image-wrapper {
+        padding: 45px;
+    }
 }
 
 
@@ -1156,13 +1160,27 @@ footer {
     .featured-media {
         height: 380px;
     }
+
+    .section {
+        padding: 90px 0;
+    }
+
+    .journal-card > img {
+        height: 200px;
+    }
+
+    .footer-bottom {
+        flex-wrap: wrap;
+        gap: 12px;
+        justify-content: center;
+    }
 }
 
 
 @media(max-width:650px) {
 
     .section {
-        padding: 80px 0;
+        padding: 70px 0;
     }
 
     .navbar {
@@ -1177,12 +1195,25 @@ footer {
         min-height: 650px;
     }
 
+    .hero-content {
+        padding-top: 80px;
+    }
+
     .hero h1 {
         font-size: 57px;
     }
 
+    .hero-description {
+        font-size: 15px;
+        max-width: 420px;
+    }
+
     .hero-actions {
         flex-wrap: wrap;
+    }
+
+    .eyebrow {
+        letter-spacing: 2.5px;
     }
 
     .skills-grid,
@@ -1192,6 +1223,10 @@ footer {
 
     .skill-image-wrapper {
         height: 240px;
+    }
+
+    .journal-card > img {
+        height: 180px;
     }
 
     .journal-header {
@@ -1215,17 +1250,46 @@ footer {
         gap: 40px;
     }
 
+    .about-image-wrapper {
+        padding: 35px;
+    }
+
     .logo img {
         height: 45px;
     }
 
     .footer-grid {
         grid-template-columns: 1fr;
+        gap: 35px;
+    }
+
+    .footer-brand {
+        padding-bottom: 10px;
+    }
+
+    .footer-column {
+        padding: 15px 0;
+        border-top: 1px solid #1a3a28;
+    }
+
+    .footer-column:first-of-type {
+        border-top: none;
+        padding-top: 0;
     }
 
     .footer-bottom {
         flex-direction: column;
         gap: 10px;
+        text-align: center;
+        padding-top: 25px;
+    }
+
+    .final-cta {
+        min-height: 440px;
+    }
+
+    .final-cta-content {
+        padding: 30px 20px;
     }
 }
 
@@ -1243,6 +1307,22 @@ footer {
         width: 52px;
         height: 52px;
     }
+
+    .eyebrow {
+        font-size: 10px;
+        letter-spacing: 2px;
+    }
+
+    .hero-description {
+        font-size: 14px;
+    }
+
+    .primary-button,
+    .light-button {
+        padding: 12px 18px;
+        font-size: 11px;
+        gap: 10px;
+    }
 }
 
 @media(max-height:600px) and (orientation: landscape) {
@@ -1253,6 +1333,14 @@ footer {
 
     .hero {
         min-height: 500px;
+    }
+
+    .final-cta {
+        min-height: 380px;
+    }
+
+    .final-cta-content {
+        padding: 25px 20px;
     }
 }
 
