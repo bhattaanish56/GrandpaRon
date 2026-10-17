@@ -177,3 +177,24 @@ document.addEventListener('click', (e) => {
         openVideoModal(videoId);
     }
 });
+
+
+/* ================= SCROLL REVEAL ================= */
+
+const observerOptions = {
+    threshold: 0.15,
+    rootMargin: '0px 0px -50px 0px'
+};
+
+const sectionObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('revealed');
+        }
+    });
+}, observerOptions);
+
+document.querySelectorAll('.section').forEach(section => {
+    section.classList.add('reveal');
+    sectionObserver.observe(section);
+});

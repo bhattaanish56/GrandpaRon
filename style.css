@@ -3672,3 +3672,24 @@ footer {
         font-size: 35px;
     }
 }
+
+/* ================= SCROLL REVEAL ================= */
+
+.section.reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.section.revealed {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .section.reveal {
+        opacity: 1;
+        transform: none;
+        transition: none;
+    }
+}
