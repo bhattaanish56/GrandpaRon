@@ -338,6 +338,8 @@ button {
     justify-content: space-between;
 
     cursor: pointer;
+
+    color: inherit;
 }
 
 
