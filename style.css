@@ -1176,6 +1176,16 @@ footer {
         gap: 12px;
         justify-content: center;
     }
+
+    .video-filters {
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    .video-page-hero {
+        min-height: 360px;
+        padding: 110px 20px 60px;
+    }
 }
 
 
@@ -1900,6 +1910,9 @@ footer {
     color: var(--forest);
 
     margin: 0 0 7px;
+
+    word-wrap: break-word;
+    overflow-wrap: break-word;
 }
 
 .video-duration {
@@ -1971,6 +1984,17 @@ footer {
     border-radius: 16px;
     overflow: hidden;
     animation: slideInModal 0.3s ease forwards;
+}
+
+@media(max-width: 650px) {
+    .video-modal-container {
+        width: 95vw;
+        border-radius: 12px;
+    }
+
+    .video-player-modal {
+        padding: 10px;
+    }
 }
 
 @keyframes slideInModal {
@@ -2055,6 +2079,40 @@ footer {
 
 .video-modal-close:hover {
     background: rgba(0, 0, 0, 0.8);
+}
+
+/* VIDEO PAGE RESPONSIVE */
+
+@media (max-width: 1000px) {
+    .video-library-grid {
+        grid-template-columns: repeat(2, 1fr);
+        column-gap: 24px;
+        row-gap: 40px;
+    }
+}
+
+@media (max-width: 650px) {
+    .video-library-grid {
+        grid-template-columns: 1fr;
+        row-gap: 35px;
+    }
+
+    .video-page-hero {
+        min-height: 320px;
+        padding: 100px 20px 50px;
+    }
+
+    .video-library {
+        padding: 40px 0 90px;
+    }
+
+    .video-filters {
+        margin-bottom: 35px;
+    }
+
+    .library-video-info h3 {
+        font-size: 1.15rem;
+    }
 }
 
 .adventure-container {
