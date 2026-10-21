@@ -297,41 +297,114 @@ function performSearch(query) {
 // Create search UI
 const searchButton = document.querySelector(".search-button");
 
-if (searchButton) {
-    // Create search container
+if (searchButton && navbar) {
+    // Create search container with close button
     const searchContainer = document.createElement('div');
     searchContainer.className = 'search-container';
     searchContainer.innerHTML = `
+        <button class="search-icon-display" aria-hidden="true"></button>
         <input type="text" class="search-input" placeholder="${getSearchScope()}" aria-label="Search">
-        <div class="search-dropdown"></div>
+        <button class="search-close" aria-label="Close search">✕</button>
     `;
 
-    // Insert after nav-right
+    // Insert before search button in nav-right
     const navRight = document.querySelector('.nav-right');
     navRight.insertBefore(searchContainer, searchButton);
 
-    const searchInput = searchContainer.querySelector('.search-input');
-    const searchDropdown = searchContainer.querySelector('.search-dropdown');
-    let selectedIndex = -1;
+    // Create category filters
+    const searchFilters = document.createElement('div');
+    searchFilters.className = 'search-filters';
+    searchFilters.innerHTML = `
+        <button class="search-filter-btn active" data-filter="all">All</button>
+        <button class="search-filter-btn" data-filter="skills">Skills</button>
+        <button class="search-filter-btn" data-filter="adventures">Adventures</button>
+        <button class="search-filter-btn" data-filter="pages">Pages</button>
+        <button class="search-filter-btn" data-filter="videos">Videos</button>
+    `;
+    searchContainer.appendChild(searchFilters);
 
-    // Toggle search input
+    // Get results panel (added to HTML)
+    const searchResultsPanel = document.querySelector('.search-results-panel');
+    const searchDropdown = searchResultsPanel ? searchResultsPanel.querySelector('.search-dropdown') : null;
+
+    const searchInput = searchContainer.querySelector('.search-input');
+    const searchClose = searchContainer.querySelector('.search-close');
+    const filterBtns = searchContainer.querySelectorAll('.search-filter-btn');
+
+    let selectedIndex = -1;
+    let currentFilter = 'all';
+    const currentPage = getCurrentPage();
+
+    // Hide filters on non-home pages
+    if (currentPage !== 'home') {
+        searchFilters.style.display = 'none';
+    }
+
+    // Open search
     searchButton.addEventListener('click', (e) => {
         e.stopPropagation();
-        searchContainer.classList.toggle('active');
-        if (searchContainer.classList.contains('active')) {
-            searchInput.focus();
-        } else {
-            searchInput.value = '';
-            searchDropdown.innerHTML = '';
-            searchDropdown.classList.remove('active');
-        }
+        navbar.classList.add('search-active');
+        searchInput.focus();
     });
+
+    // Close search
+    function closeSearch() {
+        navbar.classList.remove('search-active');
+        searchInput.value = '';
+        if (searchDropdown) {
+            searchDropdown.innerHTML = '';
+        }
+        if (searchResultsPanel) {
+            searchResultsPanel.classList.remove('active');
+        }
+        selectedIndex = -1;
+    }
+
+    searchClose.addEventListener('click', (e) => {
+        e.stopPropagation();
+        closeSearch();
+    });
+
+    // Category filter logic
+    filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            filterBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            currentFilter = btn.dataset.filter;
+
+            // Re-run search with new filter
+            if (searchInput.value.trim().length >= 2) {
+                const results = performSearchWithFilter(searchInput.value);
+                renderResults(results, true);
+            }
+        });
+    });
+
+    // Filter search by category (homepage only)
+    function performSearchWithFilter(query) {
+        const allResults = performSearch(query);
+
+        if (currentPage !== 'home' || currentFilter === 'all') {
+            return allResults;
+        }
+
+        return allResults.filter(item => {
+            const cat = item.category.toLowerCase();
+            if (currentFilter === 'skills') return cat === 'skills';
+            if (currentFilter === 'adventures') return cat === 'adventures' || cat === 'journal';
+            if (currentFilter === 'pages') return cat === 'about' || cat === 'gear' || cat === 'videos';
+            if (currentFilter === 'videos') return cat === 'videos';
+            return true;
+        });
+    }
 
     // Render search results
     function renderResults(results, showAll = false) {
+        if (!searchDropdown || !searchResultsPanel) return;
+
         if (results.length === 0) {
             searchDropdown.innerHTML = '<div class="search-empty">No results found</div>';
-            searchDropdown.classList.add('active');
+            searchResultsPanel.classList.add('active');
             return;
         }
 
@@ -347,7 +420,7 @@ if (searchButton) {
             </a>
         `).join('');
 
-        searchDropdown.classList.add('active');
+        searchResultsPanel.classList.add('active');
         selectedIndex = -1;
     }
 
@@ -355,17 +428,18 @@ if (searchButton) {
     searchInput.addEventListener('input', (e) => {
         const query = e.target.value;
         if (query.trim().length < 2) {
-            searchDropdown.innerHTML = '';
-            searchDropdown.classList.remove('active');
+            if (searchDropdown) searchDropdown.innerHTML = '';
+            if (searchResultsPanel) searchResultsPanel.classList.remove('active');
             return;
         }
 
-        const results = performSearch(query);
+        const results = performSearchWithFilter(query);
         renderResults(results, false);
     });
 
     // Keyboard navigation
     searchInput.addEventListener('keydown', (e) => {
+        if (!searchDropdown) return;
         const results = searchDropdown.querySelectorAll('.search-result');
 
         if (e.key === 'ArrowDown') {
@@ -384,15 +458,12 @@ if (searchButton) {
                 // Show all results
                 const query = searchInput.value;
                 if (query.trim().length >= 2) {
-                    const allResults = performSearch(query);
+                    const allResults = performSearchWithFilter(query);
                     renderResults(allResults, true);
                 }
             }
         } else if (e.key === 'Escape') {
-            searchContainer.classList.remove('active');
-            searchInput.value = '';
-            searchDropdown.innerHTML = '';
-            searchDropdown.classList.remove('active');
+            closeSearch();
         }
     });
 
@@ -400,6 +471,7 @@ if (searchButton) {
         results.forEach((result, index) => {
             if (index === selectedIndex) {
                 result.classList.add('selected');
+                result.scrollIntoView({ block: 'nearest' });
             } else {
                 result.classList.remove('selected');
             }
@@ -408,18 +480,21 @@ if (searchButton) {
 
     // Close on outside click
     document.addEventListener('click', (e) => {
-        if (!searchContainer.contains(e.target) && !searchButton.contains(e.target)) {
-            searchContainer.classList.remove('active');
-            searchInput.value = '';
-            searchDropdown.innerHTML = '';
-            searchDropdown.classList.remove('active');
+        if (navbar.classList.contains('search-active')) {
+            if (!searchContainer.contains(e.target) &&
+                !searchButton.contains(e.target) &&
+                (!searchResultsPanel || !searchResultsPanel.contains(e.target))) {
+                closeSearch();
+            }
         }
     });
 
-    // Prevent closing when clicking inside dropdown
-    searchDropdown.addEventListener('click', (e) => {
-        e.stopPropagation();
-    });
+    // Prevent closing when clicking inside results
+    if (searchResultsPanel) {
+        searchResultsPanel.addEventListener('click', (e) => {
+            e.stopPropagation();
+        });
+    }
 }
 
 
