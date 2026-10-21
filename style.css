@@ -325,6 +325,138 @@ button {
 }
 
 
+/* ================= SEARCH CONTAINER ================= */
+
+.search-container {
+    position: relative;
+    display: none;
+    margin-right: 12px;
+}
+
+.search-container.active {
+    display: block;
+}
+
+.search-input {
+    width: 240px;
+    height: 40px;
+    padding: 0 16px;
+    border: 2px solid rgba(255,255,255,.4);
+    border-radius: 20px;
+    background: transparent;
+    color: inherit;
+    font-family: inherit;
+    font-size: 13px;
+    transition: all 0.3s ease;
+}
+
+.navbar.scrolled .search-input {
+    border-color: var(--forest);
+    background: rgba(255,255,255,.5);
+}
+
+.search-input::placeholder {
+    color: inherit;
+    opacity: 0.6;
+}
+
+.search-input:focus {
+    outline: none;
+    border-color: currentColor;
+    background: rgba(255,255,255,.1);
+}
+
+.navbar.scrolled .search-input:focus {
+    background: white;
+}
+
+.search-dropdown {
+    position: absolute;
+    top: 48px;
+    left: 0;
+    right: 0;
+    max-height: 400px;
+    overflow-y: auto;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0,0,0,.15);
+    display: none;
+    z-index: 1001;
+}
+
+.search-dropdown.active {
+    display: block;
+}
+
+.search-result {
+    display: block;
+    padding: 14px 16px;
+    border-bottom: 1px solid #e8e4d8;
+    transition: background 0.2s ease;
+    cursor: pointer;
+}
+
+.search-result:last-child {
+    border-bottom: none;
+}
+
+.search-result:hover,
+.search-result.selected {
+    background: var(--cream-light);
+}
+
+.search-result-title {
+    font-weight: 600;
+    font-size: 14px;
+    color: var(--forest);
+    margin-bottom: 4px;
+}
+
+.search-result-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.search-result-category {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--brown);
+}
+
+.search-result-description {
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.4;
+}
+
+.search-empty {
+    padding: 20px 16px;
+    text-align: center;
+    color: var(--muted);
+    font-size: 13px;
+}
+
+@media(max-width: 1000px) {
+    .search-container {
+        position: absolute;
+        right: 52px;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    .search-container.active {
+        display: block;
+    }
+
+    .search-input {
+        width: 200px;
+    }
+}
+
+
 .menu-button {
     width: 23px;
     height: 18px;
