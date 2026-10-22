@@ -354,13 +354,15 @@ if (searchButton && navbar) {
         }
     });
 
-    // Position results panel below search container on mobile
+    // Position results panel below search container + filters
     function positionResultsPanel() {
-        if (window.innerWidth <= 1000 && searchResultsPanel) {
+        if (searchResultsPanel) {
             requestAnimationFrame(() => {
-                const containerRect = searchContainer.getBoundingClientRect();
-                const topPosition = containerRect.bottom;
-                searchResultsPanel.style.top = `${topPosition}px`;
+                const filtersVisible = searchFilters && window.getComputedStyle(searchFilters).display !== 'none';
+                const referenceElement = filtersVisible ? searchFilters : searchContainer;
+                const rect = referenceElement.getBoundingClientRect();
+                const gap = 20; // Gap between filters/controls and results
+                searchResultsPanel.style.top = `${rect.bottom + gap}px`;
             });
         }
     }
@@ -374,9 +376,7 @@ if (searchButton && navbar) {
         }
         if (searchResultsPanel) {
             searchResultsPanel.classList.remove('active');
-            if (window.innerWidth <= 1000) {
-                searchResultsPanel.style.top = '';
-            }
+            searchResultsPanel.style.top = '';
         }
         selectedIndex = -1;
         if (returnFocus) {
