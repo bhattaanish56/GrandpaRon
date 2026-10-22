@@ -614,8 +614,10 @@ button {
     transform: translateX(-50%);
     width: min(95%, 900px);
     max-height: calc(100vh - var(--navbar-height));
-    background: white;
-    box-shadow: 0 8px 24px rgba(0,0,0,.1);
+    background: var(--cream-light);
+    border: 1px solid rgba(24,57,44,.15);
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(0,0,0,.08);
     opacity: 0;
     pointer-events: none;
     z-index: 999;
@@ -630,8 +632,8 @@ button {
 
 .search-results-container {
     width: min(90%, 800px);
-    margin: 70px auto 0;
-    padding: 24px 0;
+    margin: 20px auto 0;
+    padding: 20px 0;
 }
 
 /* Update dropdown for panel context */
@@ -751,10 +753,15 @@ button {
 
     .navbar.search-active ~ .search-results-panel {
         top: auto;
+        width: 90%;
+        border-radius: 0 0 12px 12px;
+        border-top: none;
     }
 
     .search-results-container {
-        margin-top: 24px;
+        margin-top: 16px;
+        width: 100%;
+        padding: 16px 5%;
     }
 }
 
