@@ -621,7 +621,7 @@ button {
 
 .search-results-container {
     width: min(90%, 800px);
-    margin: 0 auto;
+    margin: 70px auto 0;
     padding: 24px 0;
 }
 
