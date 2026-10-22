@@ -340,15 +340,19 @@ if (searchButton && navbar) {
         searchFilters.style.display = 'none';
     }
 
-    // Open search
+    // Toggle search (mobile) or open (desktop)
     searchButton.addEventListener('click', (e) => {
         e.stopPropagation();
-        navbar.classList.add('search-active');
-        searchInput.focus();
+        if (navbar.classList.contains('search-active')) {
+            closeSearch();
+        } else {
+            navbar.classList.add('search-active');
+            searchInput.focus();
+        }
     });
 
     // Close search
-    function closeSearch() {
+    function closeSearch(returnFocus = false) {
         navbar.classList.remove('search-active');
         searchInput.value = '';
         if (searchDropdown) {
@@ -358,6 +362,9 @@ if (searchButton && navbar) {
             searchResultsPanel.classList.remove('active');
         }
         selectedIndex = -1;
+        if (returnFocus) {
+            searchButton.focus();
+        }
     }
 
     searchClose.addEventListener('click', (e) => {
@@ -463,7 +470,7 @@ if (searchButton && navbar) {
                 }
             }
         } else if (e.key === 'Escape') {
-            closeSearch();
+            closeSearch(true);
         }
     });
 
