@@ -302,9 +302,11 @@ if (searchButton && navbar) {
     const searchContainer = document.createElement('div');
     searchContainer.className = 'search-container';
     searchContainer.innerHTML = `
-        <button class="search-icon-display" aria-hidden="true"></button>
-        <input type="text" class="search-input" placeholder="${getSearchScope()}" aria-label="Search">
-        <button class="search-close" aria-label="Close search">✕</button>
+        <div class="search-controls">
+            <button class="search-icon-display" aria-hidden="true"></button>
+            <input type="text" class="search-input" placeholder="${getSearchScope()}" aria-label="Search">
+            <button class="search-close" aria-label="Close search">✕</button>
+        </div>
     `;
 
     // Insert before search button in nav-right
@@ -348,8 +350,20 @@ if (searchButton && navbar) {
         } else {
             navbar.classList.add('search-active');
             searchInput.focus();
+            positionResultsPanel();
         }
     });
+
+    // Position results panel below search container on mobile
+    function positionResultsPanel() {
+        if (window.innerWidth <= 1000 && searchResultsPanel) {
+            requestAnimationFrame(() => {
+                const containerRect = searchContainer.getBoundingClientRect();
+                const topPosition = containerRect.bottom;
+                searchResultsPanel.style.top = `${topPosition}px`;
+            });
+        }
+    }
 
     // Close search
     function closeSearch(returnFocus = false) {
@@ -360,6 +374,9 @@ if (searchButton && navbar) {
         }
         if (searchResultsPanel) {
             searchResultsPanel.classList.remove('active');
+            if (window.innerWidth <= 1000) {
+                searchResultsPanel.style.top = '';
+            }
         }
         selectedIndex = -1;
         if (returnFocus) {
@@ -384,6 +401,7 @@ if (searchButton && navbar) {
                 const results = performSearchWithFilter(searchInput.value);
                 renderResults(results, true);
             }
+            positionResultsPanel();
         });
     });
 
@@ -412,6 +430,7 @@ if (searchButton && navbar) {
         if (results.length === 0) {
             searchDropdown.innerHTML = '<div class="search-empty">No results found</div>';
             searchResultsPanel.classList.add('active');
+            positionResultsPanel();
             return;
         }
 
@@ -428,6 +447,7 @@ if (searchButton && navbar) {
         `).join('');
 
         searchResultsPanel.classList.add('active');
+        positionResultsPanel();
         selectedIndex = -1;
     }
 

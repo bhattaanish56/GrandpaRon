@@ -459,6 +459,15 @@ button {
     z-index: 10;
 }
 
+/* Search controls wrapper */
+.navbar.search-active .search-controls {
+    display: flex;
+    flex: 1;
+    min-width: 0;
+    align-items: center;
+    gap: 16px;
+}
+
 /* Hide navbar elements when search is active */
 .navbar.search-active .logo,
 .navbar.search-active .nav-links,
@@ -685,7 +694,13 @@ button {
         box-shadow: 0 2px 10px rgba(0,0,0,.08);
         z-index: 998;
         transform: none;
-        justify-content: flex-start;
+        display: block;
+        color: var(--forest);
+    }
+
+    .navbar.search-active .search-controls {
+        display: flex;
+        align-items: center;
         gap: 12px;
     }
 
@@ -697,33 +712,45 @@ button {
         flex: 1;
         height: 44px;
         font-size: 15px;
+        border-color: var(--forest);
+        background: rgba(255,255,255,.6);
+        color: var(--text);
+    }
+
+    .navbar.search-active .search-input::placeholder {
+        color: var(--muted);
+        opacity: 1;
+    }
+
+    .navbar.search-active .search-input:focus {
+        background: white;
+        border-color: var(--forest);
     }
 
     .navbar.search-active .search-close {
         display: flex;
+        border-color: var(--forest);
+        color: var(--forest);
     }
 
     .navbar.search-active .search-filters {
-        position: fixed;
-        top: calc(var(--navbar-height) + 68px);
-        left: 0;
-        right: 0;
+        position: relative;
         width: 100%;
         transform: none;
-        padding: 12px 5%;
-        background: rgba(247,242,231,.97);
-        backdrop-filter: blur(15px);
-        border-top: 1px solid rgba(24,57,44,.1);
-        z-index: 998;
+        padding: 16px 0 12px 0;
+        background: transparent;
+        border-top: none;
+        z-index: auto;
+        left: auto;
+        display: flex;
     }
 
-    .navbar.scrolled.search-active .search-container,
-    .navbar.scrolled.search-active .search-filters {
+    .navbar.scrolled.search-active .search-container {
         background: rgba(247,242,231,.97);
     }
 
     .navbar.search-active ~ .search-results-panel {
-        top: calc(var(--navbar-height) + 68px + 100px);
+        top: auto;
     }
 
     .search-results-container {
