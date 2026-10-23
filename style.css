@@ -1248,11 +1248,10 @@ button {
 
 
 .featured-media {
-    height: 460px;
-
     position: relative;
-
     overflow: hidden;
+    aspect-ratio: 16 / 9;
+    width: 100%;
 }
 
 
@@ -1620,10 +1619,6 @@ footer {
         grid-template-columns: repeat(2,1fr);
     }
 
-    .featured-media {
-        height: 380px;
-    }
-
     .section {
         padding: 90px 0;
     }
@@ -1746,10 +1741,6 @@ footer {
     .view-all {
         display: inline-block;
         margin-top: 20px;
-    }
-
-    .featured-media {
-        height: 300px;
     }
 
     .featured-grid {
