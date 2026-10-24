@@ -1043,16 +1043,15 @@ button {
     justify-content: center;
     background: var(--cream);
     border-radius: 8px;
-    padding: 60px;
+    padding: 0;
 }
 
 
 .about-image-wrapper img {
-    width: auto;
+    width: 100%;
     height: auto;
-    max-width: 100%;
-    max-height: 400px;
-    object-fit: contain;
+    object-fit: cover;
+    object-position: center 30%;
 
     transition: .7s ease;
 }
@@ -3033,7 +3032,7 @@ footer {
 
 .about-intro-grid::before {
     content: '';
-    background: url('assets/couple.jpg') center 30%/cover no-repeat;
+    background: url('assets/ron-couple-canoe.jpeg') center 35%/cover no-repeat;
     height: 600px;
     grid-column: 1;
 }
@@ -3110,7 +3109,7 @@ footer {
     }
 
     .about-intro-image img {
-        object-position: top;
+        object-position: center 25%;
     }
 
     .about-intro-text {
