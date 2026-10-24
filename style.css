@@ -2997,7 +2997,7 @@ footer {
 .about-intro {
     background: var(--cream-light);
 
-    padding: 120px 0;
+    padding: 90px 0;
 }
 
 .about-intro-grid {
@@ -3033,7 +3033,7 @@ footer {
 
 .about-intro-grid::before {
     content: '';
-    background: url('assets/couple.jpg') center/cover;
+    background: url('assets/couple.jpg') center 30%/cover no-repeat;
     height: 600px;
     grid-column: 1;
 }
@@ -3057,7 +3057,7 @@ footer {
 
     color: var(--forest);
 
-    font-size: clamp(2.7rem, 5vw, 4.3rem);
+    font-size: clamp(2.4rem, 4.5vw, 3.8rem);
 
     line-height: 1.05;
 
@@ -3067,11 +3067,13 @@ footer {
 .about-intro-content p:not(.eyebrow) {
     color: var(--muted);
 
-    line-height: 1.8;
+    line-height: 1.75;
 
     font-size: 1rem;
 
-    margin-bottom: 20px;
+    margin-bottom: 18px;
+
+    max-width: 470px;
 }
 
 @media (max-width: 768px) {
