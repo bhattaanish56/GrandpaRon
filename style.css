@@ -1041,17 +1041,17 @@ button {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: var(--cream);
-    border-radius: 8px;
     padding: 0;
 }
 
 
 .about-image-wrapper img {
     width: 100%;
+    max-width: 500px;
     height: auto;
     object-fit: cover;
     object-position: center 30%;
+    border-radius: 8px;
 
     transition: .7s ease;
 }
@@ -3035,6 +3035,7 @@ footer {
     background: url('assets/ron-couple-canoe.jpeg') center 35%/cover no-repeat;
     height: 600px;
     grid-column: 1;
+    border-radius: 8px;
 }
 
 .about-intro-text {
@@ -3106,6 +3107,7 @@ footer {
         aspect-ratio: 3/4;
         overflow: hidden;
         margin: 30px 0;
+        border-radius: 8px;
     }
 
     .about-intro-image img {
