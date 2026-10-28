@@ -1176,6 +1176,10 @@ button {
     transition: .6s ease;
 }
 
+.skill-img-fire {
+    object-position: center 15%;
+}
+
 
 .skill-card:hover img {
     transform: scale(1.07);
@@ -3265,6 +3269,10 @@ footer {
     display: block;
 
     transition: transform .5s ease;
+}
+
+.about-img-camping {
+    object-position: center 65%;
 }
 
 .about-skill::after {
