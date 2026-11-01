@@ -189,6 +189,27 @@ document.addEventListener("keydown", (e) => {
     }
 });
 
+// Smooth scroll for hash links with navbar offset
+document.addEventListener("click", (e) => {
+    const link = e.target.closest("a[href^='#']");
+    if (!link) return;
+
+    const hash = link.getAttribute("href");
+    if (!hash || hash === "#") return;
+
+    const target = document.querySelector(hash);
+    if (!target) return;
+
+    e.preventDefault();
+    const navbarHeight = 84;
+    const targetPosition = target.getBoundingClientRect().top + window.scrollY - navbarHeight;
+
+    window.scrollTo({
+        top: targetPosition,
+        behavior: "smooth"
+    });
+});
+
 
 /* ================= SEARCH ================= */
 
