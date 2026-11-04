@@ -201,7 +201,7 @@ document.addEventListener("click", (e) => {
     if (!target) return;
 
     e.preventDefault();
-    const navbarHeight = 84;
+    const navbarHeight = 79;
     const targetPosition = target.getBoundingClientRect().top + window.scrollY - navbarHeight;
 
     window.scrollTo({
@@ -210,109 +210,185 @@ document.addEventListener("click", (e) => {
     });
 });
 
+// Handle section scrolling on page load
+window.addEventListener('load', () => {
+    if (window.location.hash) {
+        const target = document.querySelector(window.location.hash);
+        if (target) {
+            setTimeout(() => {
+                const navbarHeight = 79;
+                const targetPosition = target.getBoundingClientRect().top + window.scrollY - navbarHeight;
+                window.scrollTo({
+                    top: targetPosition,
+                    behavior: "smooth"
+                });
+            }, 100);
+        }
+    }
+});
+
 
 /* ================= SEARCH ================= */
 
-// Search data index
-const SEARCH_INDEX = {
-    skills: [
-        { title: 'Fire', description: 'Learn how to start and maintain a fire in different conditions', url: 'fire.html', category: 'Skills' },
-        { title: 'Fishing', description: 'Tips, techniques and equipment learned from years on the water', url: 'fishing.html', category: 'Skills' },
-        { title: 'Hunting', description: 'Preparation, field knowledge and outdoor experience', url: 'hunting.html', category: 'Skills' },
-        { title: 'Camping', description: 'Set up camp, stay prepared, and enjoy the outdoors', url: 'camping.html', category: 'Skills' }
-    ],
-    adventures: [
-        { title: 'Northern Lake', description: 'A few days away from everything, exploring the lake by canoe', url: 'adventures.html', category: 'Adventures' },
-        { title: 'Days on the Lake', description: 'Early mornings, quiet water, and plenty of time to fish and explore', url: 'fishing.html', category: 'Adventures' },
-        { title: 'A Night Under the Stars', description: 'Setting up camp, cooking over the fire, and settling in for the night', url: 'camping.html', category: 'Adventures' },
-        { title: 'Into the Woods', description: 'Spending time in the field and learning to pay attention', url: 'hunting.html', category: 'Adventures' },
-        { title: 'Evenings Around the Fire', description: 'Something special about ending a day outdoors around a warm fire', url: 'fire.html', category: 'Adventures' },
-        { title: 'Our Favorite Fishing Spot', description: 'A quiet morning on the water and what we have learned over the years', url: 'adventures.html', category: 'Journal' },
-        { title: 'What We Keep in Our Canoe', description: 'The things we never leave home without when heading onto the water', url: 'adventures.html', category: 'Journal' },
-        { title: 'A Winter Camping Experience', description: 'What worked, what did not, and what we would do differently', url: 'adventures.html', category: 'Journal' }
-    ],
-    pages: [
-        { title: 'About Us', description: 'Meet Grandpa Ron and learn about our outdoor adventures', url: 'about.html', category: 'About' },
-        { title: 'Gear Guide', description: 'Equipment and gear recommendations from our experiences', url: 'gear.html', category: 'Gear' },
-        { title: 'All Skills', description: 'Explore our complete collection of survival skills', url: 'skills.html', category: 'Skills' },
-        { title: 'All Videos', description: 'Watch our adventures, tutorials and outdoor experiences', url: 'videos.html', category: 'Videos' }
-    ]
+// Synonym dictionary for expanded search
+const SEARCH_SYNONYMS = {
+    fishing: ['angling', 'fish', 'catch', 'rod', 'reel', 'tackle', 'bait'],
+    camping: ['camp', 'tent', 'outdoors', 'backpacking', 'wilderness'],
+    hunting: ['hunt', 'game', 'tracking', 'wildlife', 'deer', 'bow'],
+    hiking: ['hike', 'trail', 'walk', 'trek', 'backpacking'],
+    fire: ['campfire', 'bonfire', 'flames', 'kindling', 'tinder'],
+    gear: ['equipment', 'tools', 'supplies', 'kit'],
+    adventure: ['trip', 'journey', 'expedition', 'explore']
 };
 
-// Get current page context
-function getCurrentPage() {
+// Comprehensive search index extracted from all pages
+const SEARCH_INDEX = [
+    // Home page
+    { title: 'Home', description: 'Go Anywhere Together Real skills real adventures outdoor knowledge', url: 'index.html', category: 'Pages', keywords: 'home adventure outdoors skills videos' },
+    { title: 'Meet Grandpa Ron', description: 'A lifetime outdoors love for adventure lessons worth passing along', url: 'index.html', category: 'About', section: 'about', keywords: 'about story grandpa ron' },
+
+    // About page
+    { title: 'About Grandpa Ron', description: 'Meet Grandpa Ron lifetime outdoors love for adventure and plenty of lessons worth passing along', url: 'about.html', category: 'About', keywords: 'about story couple outdoor experience' },
+    { title: 'Our Story', description: 'We have always found our way outside Being outdoors spending time together enjoying places', url: 'about.html', category: 'About', section: 'story', keywords: 'story experience outdoor learning' },
+    { title: 'Why We Share', description: 'Experience is better when it is passed on Learn Explore Together', url: 'about.html', category: 'About', section: 'values', keywords: 'learn explore together share knowledge' },
+
+    // Skills pages
+    { title: 'Fire', description: 'Learn how to start and maintain a fire in different conditions Building fires preparing site getting flames going', url: 'fire.html', category: 'Skills', keywords: 'fire campfire survival flames kindling tinder warmth' },
+    { title: 'Building a Fire', description: 'Prepare location gather fuel choose fire-starting method build structure survival skill', url: 'fire.html', category: 'Skills', section: 'content', keywords: 'fire building campfire survival warmth cook' },
+
+    { title: 'Fishing', description: 'Tips techniques and equipment learned from years on the water choosing spot casting line waiting for bite', url: 'fishing.html', category: 'Skills', keywords: 'fishing angling fish catch rod reel water lake' },
+    { title: 'Fishing Basics', description: 'Choose the right spot gather gear choose bait cast your line patience on the water', url: 'fishing.html', category: 'Skills', section: 'content', keywords: 'fishing technique bait tackle rod reel catch' },
+
+    { title: 'Hunting', description: 'Preparation field knowledge and outdoor experience understanding the land preparing gear moving responsibly', url: 'hunting.html', category: 'Skills', keywords: 'hunting game tracking wildlife field outdoor' },
+    { title: 'Hunting Basics', description: 'Know the land prepare your gear read the signs move with care field knowledge', url: 'hunting.html', category: 'Skills', section: 'content', keywords: 'hunting tracking wildlife deer bow field' },
+
+    { title: 'Camping', description: 'Set up camp stay prepared and enjoy the outdoors choosing campsite setting up shelter settling in', url: 'camping.html', category: 'Skills', keywords: 'camping camp tent shelter backpacking outdoors' },
+    { title: 'Camping Basics', description: 'Choose your campsite set up shelter prepare camp settle in for the night', url: 'camping.html', category: 'Skills', section: 'content', keywords: 'camping tent shelter site preparation outdoors' },
+
+    // Skills hub
+    { title: 'All Skills', description: 'Outdoor Skills Practical knowledge learned through years of spending time outdoors Fire Fishing Hunting Camping', url: 'skills.html', category: 'Skills', keywords: 'skills survival outdoor fire fishing hunting camping' },
+
+    // Adventures
+    { title: 'Adventures', description: 'Out Here Together quiet mornings on water nights around campfire places and moments shared along the way', url: 'adventures.html', category: 'Adventures', keywords: 'adventures stories journey trip explore' },
+    { title: 'Northern Lake', description: 'A few days away from everything exploring the lake by canoe enjoying the quiet of the outdoors', url: 'adventures.html', category: 'Adventures', section: 'featured', keywords: 'canoe lake canoeing adventure water' },
+    { title: 'Days on the Lake', description: 'Early mornings quiet water and plenty of time to fish and explore', url: 'adventures.html', category: 'Adventures', keywords: 'fishing lake water morning explore' },
+    { title: 'A Night Under the Stars', description: 'Setting up camp cooking over the fire and settling in for the night', url: 'adventures.html', category: 'Adventures', keywords: 'camping stars night fire cook' },
+    { title: 'Into the Woods', description: 'Spending time in the field and learning to pay attention to what is around us', url: 'adventures.html', category: 'Adventures', keywords: 'hunting woods field wildlife nature' },
+    { title: 'Evenings Around the Fire', description: 'There is something special about ending a day outdoors around a warm fire', url: 'adventures.html', category: 'Adventures', keywords: 'fire campfire evening warmth outdoors' },
+
+    // Journal entries
+    { title: 'Our Favorite Fishing Spot', description: 'A quiet morning on the water and what we have learned over the years', url: 'adventures.html', category: 'Journal', keywords: 'fishing water lake spot morning' },
+    { title: 'What We Keep in Our Canoe', description: 'The things we never leave home without when heading onto the water', url: 'adventures.html', category: 'Journal', keywords: 'canoe gear equipment water lake' },
+    { title: 'A Winter Camping Experience', description: 'What worked what did not and what we would do differently', url: 'adventures.html', category: 'Journal', keywords: 'camping winter experience outdoors' },
+
+    // Gear page
+    { title: 'Gear Guide', description: 'Gear For The Adventure Equipment and gear recommendations from our experiences Pack for the day', url: 'gear.html', category: 'Gear', keywords: 'gear equipment tools supplies kit prepare' },
+    { title: 'Fishing Gear', description: 'Fishing rod reel tackle bait water equipment for catching fish on the lake', url: 'gear.html', category: 'Gear', section: 'fishing', keywords: 'fishing gear rod reel tackle bait equipment' },
+    { title: 'Camping Gear', description: 'Tent sleeping bag backpack camp stove essentials for comfortable camping outdoors', url: 'gear.html', category: 'Gear', section: 'camping', keywords: 'camping gear tent sleeping bag backpack equipment' },
+    { title: 'Hunting Gear', description: 'Rifle bow hunting knife field equipment for responsible hunting preparation', url: 'gear.html', category: 'Gear', section: 'hunting', keywords: 'hunting gear rifle bow knife field equipment' },
+    { title: 'Fire & Survival Gear', description: 'Fire starter field knife cordage tarp flashlight emergency gear for unexpected situations', url: 'gear.html', category: 'Gear', section: 'fire-survival', keywords: 'fire survival gear emergency knife tarp flashlight' },
+    { title: 'Canoeing Gear', description: 'Canoe paddle life jackets dry bags water equipment for adventures on the water', url: 'gear.html', category: 'Gear', section: 'canoeing', keywords: 'canoe paddle water lake gear equipment' },
+
+    // Videos page
+    { title: 'Videos', description: 'Real Adventures Real Lessons Watch our latest trips tutorials and outdoor experiences', url: 'videos.html', category: 'Videos', keywords: 'videos tutorials adventures watch learn' }
+];
+
+// Expand query with synonyms
+function expandQueryWithSynonyms(query) {
+    const words = query.toLowerCase().split(/\s+/);
+    const expanded = [...words];
+
+    words.forEach(word => {
+        Object.keys(SEARCH_SYNONYMS).forEach(key => {
+            if (word.includes(key) || key.includes(word)) {
+                expanded.push(key, ...SEARCH_SYNONYMS[key]);
+            }
+            SEARCH_SYNONYMS[key].forEach(syn => {
+                if (word.includes(syn) || syn.includes(word)) {
+                    expanded.push(key, ...SEARCH_SYNONYMS[key]);
+                }
+            });
+        });
+    });
+
+    return [...new Set(expanded)].join(' ');
+}
+
+// Detect GitHub Pages subpath
+function getBasePath() {
     const path = window.location.pathname;
-    if (path.includes('videos.html')) return 'videos';
-    if (path.includes('skills.html')) return 'skills';
-    if (path.includes('adventures.html')) return 'adventures';
-    if (path.includes('fire.html') || path.includes('fishing.html') ||
-        path.includes('hunting.html') || path.includes('camping.html')) return 'skill-detail';
-    return 'home';
-}
-
-// Get search scope text
-function getSearchScope() {
-    const page = getCurrentPage();
-    if (page === 'home') return 'Search all content';
-    if (page === 'videos') return 'Search videos';
-    if (page === 'skills') return 'Search skills';
-    if (page === 'adventures') return 'Search adventures';
-    if (page === 'skill-detail') return 'Search this page';
-    return 'Search';
-}
-
-// Filter search results based on page context
-function getSearchableContent() {
-    const page = getCurrentPage();
-    let content = [];
-
-    if (page === 'home') {
-        // Homepage: search everything
-        content = [...SEARCH_INDEX.skills, ...SEARCH_INDEX.adventures, ...SEARCH_INDEX.pages];
-
-        // Add videos with fetched titles
-        VIDEO_LIBRARY.forEach(video => {
-            content.push({
-                title: video.title,
-                description: video.categoryLabel,
-                url: 'videos.html',
-                category: 'Videos',
-                videoId: video.id
-            });
-        });
-    } else if (page === 'videos') {
-        // Videos page: only videos
-        VIDEO_LIBRARY.forEach(video => {
-            content.push({
-                title: video.title,
-                description: video.categoryLabel,
-                url: 'videos.html',
-                category: 'Videos',
-                videoId: video.id
-            });
-        });
-    } else if (page === 'skills') {
-        // Skills page: only skills
-        content = [...SEARCH_INDEX.skills];
-    } else if (page === 'adventures') {
-        // Adventures page: only adventures
-        content = [...SEARCH_INDEX.adventures];
+    if (path.includes('/GrandpaRon/')) {
+        return '/GrandpaRon/';
     }
-
-    return content;
+    return '/';
 }
 
-// Search function with partial matching
+// Initialize Fuse.js search engine
+let fuseInstance = null;
+
+function initializeFuseSearch() {
+    // Add videos to search index with fetched titles
+    const searchData = [...SEARCH_INDEX];
+
+    VIDEO_LIBRARY.forEach(video => {
+        searchData.push({
+            title: video.title,
+            description: video.categoryLabel,
+            url: 'videos.html',
+            category: 'Videos',
+            keywords: `video ${video.category} youtube`
+        });
+    });
+
+    // Fuse.js configuration
+    const fuseOptions = {
+        keys: [
+            { name: 'title', weight: 0.5 },
+            { name: 'description', weight: 0.3 },
+            { name: 'keywords', weight: 0.2 }
+        ],
+        threshold: 0.4,
+        minMatchCharLength: 2,
+        includeScore: true,
+        ignoreLocation: true
+    };
+
+    fuseInstance = new Fuse(searchData, fuseOptions);
+}
+
+// Perform fuzzy search with synonym expansion
 function performSearch(query) {
     if (!query || query.trim().length < 2) return [];
+    if (!fuseInstance) initializeFuseSearch();
 
-    const searchContent = getSearchableContent();
-    const terms = query.toLowerCase().trim().split(/\s+/);
+    const expandedQuery = expandQueryWithSynonyms(query);
+    const results = fuseInstance.search(expandedQuery);
 
-    return searchContent.filter(item => {
-        const searchText = `${item.title} ${item.description}`.toLowerCase();
-        return terms.every(term => searchText.includes(term));
-    }).slice(0, 8); // Limit to 8 results
+    // Deduplicate by URL + section
+    const seen = new Set();
+    const deduped = results.filter(result => {
+        const key = `${result.item.url}#${result.item.section || ''}`;
+        if (seen.has(key)) return false;
+        seen.add(key);
+        return true;
+    });
+
+    // Sort by score (lower is better in Fuse.js) and exact match priority
+    const sorted = deduped.sort((a, b) => {
+        const aExactTitle = a.item.title.toLowerCase().includes(query.toLowerCase());
+        const bExactTitle = b.item.title.toLowerCase().includes(query.toLowerCase());
+
+        if (aExactTitle && !bExactTitle) return -1;
+        if (!aExactTitle && bExactTitle) return 1;
+
+        return a.score - b.score;
+    });
+
+    // Return items, limit to 8 results
+    return sorted.slice(0, 8).map(result => ({
+        ...result.item,
+        url: result.item.section ? `${result.item.url}#${result.item.section}` : result.item.url
+    }));
 }
 
 // Create search UI
@@ -325,7 +401,7 @@ if (searchButton && navbar) {
     searchContainer.innerHTML = `
         <div class="search-controls">
             <button class="search-icon-display" aria-hidden="true"></button>
-            <input type="text" class="search-input" placeholder="${getSearchScope()}" aria-label="Search">
+            <input type="text" class="search-input" placeholder="Search all content" aria-label="Search">
             <button class="search-close" aria-label="Close search">✕</button>
         </div>
     `;
@@ -339,10 +415,10 @@ if (searchButton && navbar) {
     searchFilters.className = 'search-filters';
     searchFilters.innerHTML = `
         <button class="search-filter-btn active" data-filter="all">All</button>
-        <button class="search-filter-btn" data-filter="skills">Skills</button>
-        <button class="search-filter-btn" data-filter="adventures">Adventures</button>
-        <button class="search-filter-btn" data-filter="pages">Pages</button>
-        <button class="search-filter-btn" data-filter="videos">Videos</button>
+        <button class="search-filter-btn" data-filter="Skills">Skills</button>
+        <button class="search-filter-btn" data-filter="Adventures">Adventures</button>
+        <button class="search-filter-btn" data-filter="Gear">Gear</button>
+        <button class="search-filter-btn" data-filter="Videos">Videos</button>
     `;
     searchContainer.appendChild(searchFilters);
 
@@ -356,12 +432,6 @@ if (searchButton && navbar) {
 
     let selectedIndex = -1;
     let currentFilter = 'all';
-    const currentPage = getCurrentPage();
-
-    // Hide filters on non-home pages
-    if (currentPage !== 'home') {
-        searchFilters.style.display = 'none';
-    }
 
     // Toggle search (mobile) or open (desktop)
     searchButton.addEventListener('click', (e) => {
@@ -426,21 +496,18 @@ if (searchButton && navbar) {
         });
     });
 
-    // Filter search by category (homepage only)
+    // Filter search by category
     function performSearchWithFilter(query) {
         const allResults = performSearch(query);
 
-        if (currentPage !== 'home' || currentFilter === 'all') {
+        if (currentFilter === 'all') {
             return allResults;
         }
 
         return allResults.filter(item => {
-            const cat = item.category.toLowerCase();
-            if (currentFilter === 'skills') return cat === 'skills';
-            if (currentFilter === 'adventures') return cat === 'adventures' || cat === 'journal';
-            if (currentFilter === 'pages') return cat === 'about' || cat === 'gear' || cat === 'videos';
-            if (currentFilter === 'videos') return cat === 'videos';
-            return true;
+            const cat = item.category;
+            return cat === currentFilter ||
+                   (currentFilter === 'Adventures' && (cat === 'Adventures' || cat === 'Journal'));
         });
     }
 
