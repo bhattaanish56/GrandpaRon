@@ -1634,6 +1634,76 @@ footer {
 }
 
 
+/* ================= IMAGE SKELETON LOADING ================= */
+
+/* Skeleton placeholder background */
+img[loading="lazy"] {
+    background: linear-gradient(90deg,
+        var(--cream) 0%,
+        var(--cream-light) 50%,
+        var(--cream) 100%);
+    background-size: 200% 100%;
+}
+
+/* Shimmer animation - subtle and slow */
+img[loading="lazy"]:not(.loaded) {
+    animation: skeleton-shimmer 2s ease-in-out infinite;
+}
+
+@keyframes skeleton-shimmer {
+    0% {
+        background-position: 200% 0;
+    }
+    100% {
+        background-position: -200% 0;
+    }
+}
+
+/* Fade in when loaded */
+img[loading="lazy"].loaded {
+    animation: skeleton-fade-in 0.4s ease-out;
+}
+
+@keyframes skeleton-fade-in {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* Respect reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+    img[loading="lazy"]:not(.loaded) {
+        animation: none;
+        background: var(--cream);
+    }
+
+    img[loading="lazy"].loaded {
+        animation: none;
+        opacity: 1;
+    }
+}
+
+/* YouTube thumbnail skeletons */
+.youtube-thumbnail {
+    background: linear-gradient(90deg,
+        var(--cream) 0%,
+        var(--cream-light) 50%,
+        var(--cream) 100%);
+    background-size: 200% 100%;
+}
+
+.youtube-thumbnail:not(.loaded) {
+    animation: skeleton-shimmer 2s ease-in-out infinite;
+}
+
+.youtube-thumbnail.loaded {
+    animation: skeleton-fade-in 0.4s ease-out;
+}
+
+
 /* ================= RESPONSIVE ================= */
 
 @media(max-width:1000px) {
@@ -2519,6 +2589,7 @@ footer {
     inset: 0;
     background: rgba(0, 0, 0, 0.85);
     animation: fadeInBackdrop 0.3s ease forwards;
+    pointer-events: none;
 }
 
 .video-modal-container {
@@ -2595,6 +2666,7 @@ footer {
 .video-modal-player {
     width: 100%;
     height: 100%;
+    pointer-events: none;
 }
 
 .video-modal-player iframe {
@@ -2602,6 +2674,7 @@ footer {
     height: 100%;
     border: 0;
     display: block;
+    pointer-events: auto;
 }
 
 .video-modal-close {

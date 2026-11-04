@@ -645,15 +645,22 @@ function closeVideoModal() {
     }, 300);
 }
 
-// Close modal when clicking backdrop
-if (videoModalBackdrop) {
-    videoModalBackdrop.addEventListener('click', closeVideoModal);
+// Close modal when clicking close button OR clicking outside video container
+if (videoModal) {
+    videoModal.addEventListener('click', (e) => {
+        // Close if clicking the close button or its children
+        if (e.target.closest('.video-modal-close')) {
+            closeVideoModal();
+            return;
+        }
+        // Close if clicking the modal background (not the container or its children)
+        if (e.target === videoModal) {
+            closeVideoModal();
+        }
+    });
 }
 
-// Close modal when clicking close button
-if (videoModalClose) {
-    videoModalClose.addEventListener('click', closeVideoModal);
-}
+// Remove separate close button handler (handled above)
 
 // Close modal on Escape key
 document.addEventListener('keydown', (e) => {
@@ -809,4 +816,76 @@ if (videoFilters.length > 0) {
             }
         });
     });
+}
+
+
+/* ================= IMAGE SKELETON LOADING ================= */
+
+// Handle image loading states for skeleton effect
+function handleImageLoad() {
+    const lazyImages = document.querySelectorAll('img[loading="lazy"]');
+
+    lazyImages.forEach(img => {
+        // Check if already loaded (cached)
+        if (img.complete && img.naturalWidth > 0) {
+            img.classList.add('loaded');
+        } else {
+            // Listen for load event
+            img.addEventListener('load', function() {
+                this.classList.add('loaded');
+            }, { once: true });
+
+            // Handle error - still mark as loaded to stop animation
+            img.addEventListener('error', function() {
+                this.classList.add('loaded');
+                console.warn('Image failed to load:', this.src);
+            }, { once: true });
+        }
+    });
+}
+
+// Handle YouTube thumbnails separately
+function handleYouTubeThumbnails() {
+    const thumbnails = document.querySelectorAll('.youtube-thumbnail');
+
+    thumbnails.forEach(img => {
+        if (img.complete && img.naturalWidth > 0) {
+            img.classList.add('loaded');
+        } else {
+            img.addEventListener('load', function() {
+                this.classList.add('loaded');
+            }, { once: true });
+
+            img.addEventListener('error', function() {
+                this.classList.add('loaded');
+            }, { once: true });
+        }
+    });
+}
+
+// Initialize on DOM ready
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function() {
+        handleImageLoad();
+        handleYouTubeThumbnails();
+    });
+} else {
+    // DOM already loaded
+    handleImageLoad();
+    handleYouTubeThumbnails();
+}
+
+// Re-run for dynamically rendered video library thumbnails
+const videoGrid = document.querySelector('.video-library-grid');
+if (videoGrid) {
+    const observer = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+            if (mutation.addedNodes.length > 0) {
+                // New thumbnails added, handle their loading
+                setTimeout(handleYouTubeThumbnails, 100);
+            }
+        });
+    });
+
+    observer.observe(videoGrid, { childList: true });
 }
