@@ -662,19 +662,34 @@ document.addEventListener('keydown', (e) => {
     }
 });
 
-// Open modal when clicking video card
+// Handle YouTube thumbnail click-to-load
 document.addEventListener('click', (e) => {
-    const trigger = e.target.closest('.library-video-image');
-    if (!trigger) return;
+    const playButton = e.target.closest('.youtube-play-button, .youtube-play-button-small');
+    if (!playButton) return;
 
-    const card = trigger.closest('.library-video-card');
-    if (!card) return;
+    const container = playButton.closest('.youtube-embed-container');
+    if (!container) return;
 
     e.preventDefault();
 
-    const videoId = trigger.dataset.videoId;
-    if (videoId) {
+    const videoId = container.dataset.videoId;
+    if (!videoId) return;
+
+    // Check if library video (opens modal) or featured video (replaces inline)
+    const isLibraryVideo = container.classList.contains('library-video-image');
+
+    if (isLibraryVideo) {
         openVideoModal(videoId);
+    } else {
+        // Replace thumbnail with iframe for featured video
+        const iframe = document.createElement('iframe');
+        iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
+        iframe.frameBorder = '0';
+        iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+        iframe.allowFullscreen = true;
+
+        container.innerHTML = '';
+        container.appendChild(iframe);
     }
 });
 
@@ -710,11 +725,21 @@ function getVideoEmbedUrl(video) {
 }
 
 function renderVideoCard(video) {
+    const thumbnailUrl = video.source === 'youtube'
+        ? `https://i.ytimg.com/vi/${video.id}/hqdefault.jpg`
+        : video.id;
+
     return `
         <article class="library-video-card" data-category="${video.category}">
-            <a href="#" class="library-video-image" data-video-id="${video.id}">
-                <iframe src="${getVideoEmbedUrl(video)}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-            </a>
+            <div class="library-video-image youtube-embed-container" data-video-id="${video.id}">
+                <img src="${thumbnailUrl}" alt="${video.title}" class="youtube-thumbnail" loading="lazy">
+                <button class="youtube-play-button-small" aria-label="Play ${video.title}">
+                    <svg viewBox="0 0 68 48" width="48" height="34">
+                        <path d="M66.52,7.74c-0.78-2.93-2.49-5.41-5.42-6.19C55.79,.13,34,0,34,0S12.21,.13,6.9,1.55 C3.97,2.33,2.27,4.81,1.48,7.74C0.06,13.05,0,24,0,24s0.06,10.95,1.48,16.26c0.78,2.93,2.49,5.41,5.42,6.19 C12.21,47.87,34,48,34,48s21.79-0.13,27.1-1.55c2.93-0.78,4.64-3.26,5.42-6.19C67.94,34.95,68,24,68,24S67.94,13.05,66.52,7.74z" fill="#f00"></path>
+                        <path d="M 45,24 27,14 27,34" fill="#fff"></path>
+                    </svg>
+                </button>
+            </div>
             <div class="library-video-info">
                 <h3>${video.title}</h3>
                 ${video.duration ? `<span class="video-duration">${video.duration}</span>` : ''}
@@ -739,10 +764,23 @@ async function renderVideoLibrary(filter = 'all') {
     // Render with fallback titles immediately
     grid.innerHTML = filtered.map(renderVideoCard).join('');
 
-    // Fetch actual titles and update only if still current
+    // Fetch actual titles and update only text elements (preserve thumbnails and event handlers)
     const enriched = await Promise.all(filtered.map(enrichVideoWithMetadata));
     if (renderToken === currentRenderToken) {
-        grid.innerHTML = enriched.map(renderVideoCard).join('');
+        const cards = grid.querySelectorAll('.library-video-card');
+        enriched.forEach((video, index) => {
+            if (cards[index]) {
+                const h3 = cards[index].querySelector('h3');
+                if (h3 && video.title !== 'Video') {
+                    h3.textContent = video.title;
+                }
+                // Update aria-label on play button
+                const playButton = cards[index].querySelector('.youtube-play-button-small');
+                if (playButton && video.title !== 'Video') {
+                    playButton.setAttribute('aria-label', `Play ${video.title}`);
+                }
+            }
+        });
     }
 }
 

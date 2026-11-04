@@ -1272,6 +1272,61 @@ button {
 }
 
 
+/* ================= YOUTUBE THUMBNAIL FACADE ================= */
+
+.youtube-embed-container {
+    position: relative;
+    width: 100%;
+    cursor: pointer;
+}
+
+.youtube-embed-container img.youtube-thumbnail {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.youtube-play-button,
+.youtube-play-button-small {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+    padding: 0;
+    z-index: 1;
+}
+
+.youtube-play-button:hover,
+.youtube-play-button-small:hover {
+    transform: translate(-50%, -50%) scale(1.1);
+}
+
+.youtube-play-button:focus-visible,
+.youtube-play-button-small:focus-visible {
+    outline: 3px solid var(--forest);
+    outline-offset: 4px;
+    border-radius: 8px;
+}
+
+.youtube-play-button svg,
+.youtube-play-button-small svg {
+    display: block;
+    filter: drop-shadow(0 2px 8px rgba(0,0,0,0.3));
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .youtube-play-button:hover,
+    .youtube-play-button-small:hover {
+        transform: translate(-50%, -50%);
+    }
+}
+
+
 .featured-play {
     position: absolute;
 
