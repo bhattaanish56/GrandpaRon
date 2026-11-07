@@ -3560,13 +3560,15 @@ img[loading="lazy"].loaded {
     background:
         linear-gradient(
             90deg,
-            rgba(14, 40, 30, 0.88),
-            rgba(14, 40, 30, 0.38)
+            rgba(14, 40, 30, 0.78) 0%,
+            rgba(14, 40, 30, 0.68) 35%,
+            rgba(14, 40, 30, 0.20) 70%,
+            rgba(14, 40, 30, 0.12) 100%
         ),
-        url("assets/main.jpg");
+        url("assets/grandpa-gear-hero.png");
 
     background-size: cover;
-    background-position: center;
+    background-position: center 20%;
 
     padding: 130px 20px 90px;
 
@@ -4149,6 +4151,8 @@ img[loading="lazy"].loaded {
         min-height: 520px;
 
         padding: 110px 20px 70px;
+
+        background-position: 65% 20%;
     }
 
     .gear-hero-content h1 {
