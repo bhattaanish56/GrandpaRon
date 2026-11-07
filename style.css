@@ -3533,7 +3533,7 @@ img[loading="lazy"].loaded {
 .about-quote {
     background: var(--forest);
 
-    padding: 100px 20px;
+    padding: 80px 20px;
 }
 
 .about-quote-content {
@@ -3553,7 +3553,7 @@ img[loading="lazy"].loaded {
 
     color: var(--cream-light);
 
-    font-size: clamp(2.4rem, 5vw, 4rem);
+    font-size: clamp(2.2rem, 4.6vw, 3.7rem);
 
     line-height: 1.15;
 
@@ -3574,7 +3574,7 @@ img[loading="lazy"].loaded {
 .about-cta {
     background: var(--cream);
 
-    padding: 100px 20px;
+    padding: 80px 20px;
 
     text-align: center;
 }
@@ -3583,6 +3583,10 @@ img[loading="lazy"].loaded {
     max-width: 700px;
 
     margin: 0 auto;
+}
+
+.about-cta .eyebrow {
+    margin-bottom: 16px;
 }
 
 .about-cta h2 {
@@ -3594,7 +3598,7 @@ img[loading="lazy"].loaded {
 
     line-height: 1.1;
 
-    margin: 15px 0 30px;
+    margin: 0 0 32px;
 }
 
 .about-cta a {
