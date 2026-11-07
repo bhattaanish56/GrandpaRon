@@ -4021,11 +4021,11 @@ img[loading="lazy"].loaded {
 ========================= */
 
 .gear-quote {
-    background: var(--brown);
+    background: #E6DAC7;
 
-    padding: 110px 20px;
+    padding: 80px 20px;
 
-    color: white;
+    color: #102D22;
 
     text-align: center;
 }
@@ -4037,7 +4037,7 @@ img[loading="lazy"].loaded {
 }
 
 .gear-quote .eyebrow {
-    color: #e2d4bb;
+    color: #8B7355;
 
     margin-bottom: 18px;
 }
@@ -4045,13 +4045,15 @@ img[loading="lazy"].loaded {
 .gear-quote h2 {
     font-family: "Inria Serif", serif;
 
-    font-size: clamp(2.6rem, 5vw, 4.5rem);
+    font-size: clamp(2.4rem, 4.5vw, 4rem);
 
     line-height: 1.05;
 
     font-weight: 500;
 
     margin: 0 0 25px;
+
+    color: #102D22;
 }
 
 .gear-quote p:last-child {
@@ -4059,57 +4061,9 @@ img[loading="lazy"].loaded {
 
     margin: 0 auto;
 
-    color: rgba(255,255,255,0.75);
+    color: rgba(16, 45, 34, 0.85);
 
     line-height: 1.7;
-}
-
-
-
-/* =========================
-   FINAL CTA
-========================= */
-
-.gear-final-cta {
-    background: var(--forest-dark);
-
-    padding: 120px 20px;
-
-    color: white;
-}
-
-.gear-final-cta-content {
-    max-width: 850px;
-}
-
-.gear-final-cta .eyebrow {
-    color: #cfc1a7;
-
-    margin-bottom: 18px;
-}
-
-.gear-final-cta h2 {
-    font-family: "Inria Serif", serif;
-
-    font-size: clamp(3rem, 6vw, 5.5rem);
-
-    line-height: 0.95;
-
-    font-weight: 500;
-
-    margin: 0 0 25px;
-
-    letter-spacing: -0.03em;
-}
-
-.gear-final-cta p:not(.eyebrow) {
-    max-width: 550px;
-
-    color: rgba(255,255,255,0.68);
-
-    line-height: 1.8;
-
-    margin: 0 0 35px;
 }
 
 
@@ -4226,12 +4180,7 @@ img[loading="lazy"].loaded {
 
 
     .gear-quote {
-        padding: 85px 20px;
-    }
-
-
-    .gear-final-cta {
-        padding: 90px 20px;
+        padding: 60px 20px;
     }
 
 }
@@ -4272,11 +4221,6 @@ img[loading="lazy"].loaded {
 
     .gear-quote h2 {
         font-size: 2.5rem;
-    }
-
-
-    .gear-final-cta h2 {
-        font-size: 3.2rem;
     }
 
 }
