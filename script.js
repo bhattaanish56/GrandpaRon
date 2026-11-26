@@ -102,6 +102,35 @@ async function enrichVideoWithMetadata(video) {
     return video;
 }
 
+/* ================= FEATURED VIDEO METADATA ================= */
+
+async function updateFeaturedVideoMetadata() {
+    const container = document.querySelector('.featured .youtube-embed-container');
+    const titleElement = document.getElementById('featured-video-title');
+    const thumbnailElement = container?.querySelector('.youtube-thumbnail');
+
+    if (!container || !titleElement) return;
+
+    const videoId = container.dataset.videoId;
+    if (!videoId) return;
+
+    // Update thumbnail from data-video-id (single source of truth)
+    if (thumbnailElement) {
+        thumbnailElement.src = `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`;
+    }
+
+    const title = await fetchYouTubeTitle(videoId);
+    if (title) {
+        titleElement.textContent = title;
+    }
+}
+
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', updateFeaturedVideoMetadata);
+} else {
+    updateFeaturedVideoMetadata();
+}
+
 /* ================= NAVIGATION ================= */
 
 const navbar = document.getElementById("navbar");
