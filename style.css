@@ -137,9 +137,9 @@ button {
     height: 100%;
     margin: auto;
 
-    display: flex;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
     align-items: center;
-    justify-content: space-between;
 }
 
 
@@ -206,9 +206,22 @@ button {
 .nav-links {
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 32px;
 
     font-size: 13px;
+}
+
+@media (max-width: 1280px) {
+    .nav-links {
+        gap: 28px;
+    }
+}
+
+@media (max-width: 1100px) {
+    .nav-links {
+        gap: 24px;
+    }
 }
 
 
@@ -1236,6 +1249,7 @@ button {
 
 .featured {
     background: var(--cream);
+    padding: 90px 0;
 }
 
 
@@ -1244,7 +1258,7 @@ button {
 
     grid-template-columns: 1.3fr .7fr;
 
-    gap: 75px;
+    gap: 60px;
 
     align-items: center;
 }
@@ -1362,9 +1376,25 @@ button {
 .featured-content p:not(.eyebrow) {
     color: var(--muted);
 
-    line-height: 1.8;
+    line-height: 1.7;
 
-    margin: 22px 0 30px;
+    margin: 18px 0 28px;
+
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.featured .section-title {
+    font-size: clamp(32px, 4vw, 44px);
+    line-height: 1.15;
+    margin-bottom: 16px;
+
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
 
 
@@ -1767,7 +1797,7 @@ img[loading="lazy"].loaded {
 
     .featured-grid {
         grid-template-columns: 1fr;
-        gap: 50px;
+        gap: 40px;
     }
 
     .footer-grid {
@@ -2140,10 +2170,10 @@ img[loading="lazy"].loaded {
     background:
         linear-gradient(
             to top,
-            rgba(14, 40, 30, 0.95),
-            rgba(14, 40, 30, 0.15)
+            rgba(14, 40, 30, 0.92),
+            rgba(14, 40, 30, 0.35)
         ),
-        url("assets/main.jpg")
+        url("assets/campfire-forest.jpg")
         center/cover no-repeat;
     color: white;
 }
@@ -2168,7 +2198,7 @@ img[loading="lazy"].loaded {
 
 /* Hunting page: compact hero */
 #hunting-hero {
-    min-height: 520px;
+    min-height: 430px;
     padding: 120px 8% 60px;
     background:
         linear-gradient(
@@ -2182,7 +2212,7 @@ img[loading="lazy"].loaded {
 
 @media (max-width: 1023px) {
     #hunting-hero {
-        min-height: 450px;
+        min-height: 380px;
         padding: 100px 8% 50px;
         background-position: 70% center;
     }
@@ -2190,9 +2220,93 @@ img[loading="lazy"].loaded {
 
 @media (max-width: 767px) {
     #hunting-hero {
-        min-height: 380px;
+        min-height: 340px;
         padding: 80px 8% 40px;
         background-position: 65% center;
+    }
+}
+
+/* Fire page: compact hero */
+#fire-hero {
+    min-height: 430px;
+    padding: 120px 8% 60px;
+    background:
+        linear-gradient(
+            to top,
+            rgba(14, 40, 30, 0.92),
+            rgba(14, 40, 30, 0.35)
+        ),
+        url("assets/campfire-forest.jpg")
+        center/cover no-repeat;
+}
+
+@media (max-width: 1023px) {
+    #fire-hero {
+        min-height: 380px;
+        padding: 100px 8% 50px;
+    }
+}
+
+@media (max-width: 767px) {
+    #fire-hero {
+        min-height: 340px;
+        padding: 80px 8% 40px;
+    }
+}
+
+/* Camping page: tent visible on desktop and mobile */
+#camping-hero {
+    min-height: 430px;
+    padding: 120px 8% 60px;
+    background:
+        linear-gradient(
+            to top,
+            rgba(14, 40, 30, 0.9),
+            rgba(14, 40, 30, 0.25)
+        ),
+        url("assets/camping-hero.jpg")
+        center/cover no-repeat;
+}
+
+@media (max-width: 1023px) {
+    #camping-hero {
+        min-height: 380px;
+        padding: 100px 8% 50px;
+    }
+}
+
+@media (max-width: 767px) {
+    #camping-hero {
+        min-height: 340px;
+        padding: 80px 8% 40px;
+    }
+}
+
+/* Fishing page */
+#fishing-hero {
+    min-height: 430px;
+    padding: 120px 8% 60px;
+    background:
+        linear-gradient(
+            to top,
+            rgba(14, 40, 30, 0.88),
+            rgba(14, 40, 30, 0.3)
+        ),
+        url("assets/fishing-hero.jpg")
+        center/cover no-repeat;
+}
+
+@media (max-width: 1023px) {
+    #fishing-hero {
+        min-height: 380px;
+        padding: 100px 8% 50px;
+    }
+}
+
+@media (max-width: 767px) {
+    #fishing-hero {
+        min-height: 340px;
+        padding: 80px 8% 40px;
     }
 }
 
@@ -2245,10 +2359,53 @@ img[loading="lazy"].loaded {
     text-align: center;
 }
 
+/* Camping video section */
+#camping-video .video-container {
+    border-radius: 12px;
+}
+
+#camping-video .section-heading {
+    margin: 0 auto 50px;
+}
+
+/* Fishing video section */
+#fishing-video .video-container {
+    border-radius: 12px;
+}
+
+#fishing-video .section-heading {
+    margin: 0 auto 50px;
+}
+
 .video-container video {
     width: 100%;
     height: auto;
     display: block;
+}
+
+.video-container iframe {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border: none;
+    border-radius: 12px;
+}
+
+.skill-video .section-description {
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: var(--muted);
+    max-width: 700px;
+    margin: 18px auto 40px;
+    text-align: center;
+}
+
+.video-credit {
+    text-align: center;
+    font-size: 0.85rem;
+    color: var(--muted);
+    margin-top: 20px;
+    font-style: italic;
 }
 
 
@@ -2420,7 +2577,7 @@ img[loading="lazy"].loaded {
 
 .more-story {
     background: #eee9dc;
-    padding: 150px 8%;
+    padding: 120px 8%;
 }
 
 .more-story-inner {

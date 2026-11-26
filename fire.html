@@ -61,7 +61,7 @@
 </header>
 
     <!-- PAGE HERO -->
-    <section class="skill-hero">
+    <section class="skill-hero" id="fire-hero">
         <div class="skill-hero-content">
 
             <p class="eyebrow">SURVIVAL SKILL</p>
@@ -81,15 +81,23 @@
 
         <div class="section-heading">
             <p class="eyebrow">WATCH & LEARN</p>
-            <h2>Building a Fire With Grandpa Ron</h2>
+            <h2>Learn to Build a Campfire</h2>
+            <p class="section-description">Learn the essentials of building and managing a campfire in this tutorial from REI.</p>
         </div>
 
-       <div class="video-container">
-    <video controls playsinline preload="metadata">
-        <source src="assets/fire1.mp4" type="video/mp4">
-        Your browser does not support video.
-    </video>
-</div>
+        <div class="video-container">
+            <!-- EDITABLE: Replace video ID below with Grandpa Ron's own video when available -->
+            <iframe
+                src="https://www.youtube.com/embed/0O3Bj8JFcTc"
+                title="How to Build a Fire - REI Tutorial"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen
+                loading="lazy">
+            </iframe>
+        </div>
+
+        <p class="video-credit">Temporary tutorial courtesy of REI.</p>
 
     </section>
 
@@ -182,8 +190,8 @@
     <!-- CLOSING NAVIGATION -->
     <section class="skill-closing-nav">
         <div class="skill-closing-nav-buttons">
-            <a href="/GrandpaRon/gear.html#fire-survival" class="skill-nav-primary">Explore Gear</a>
-            <a href="/GrandpaRon/skills.html" class="skill-nav-secondary">Browse All Skills</a>
+            <a href="gear.html#fire-survival" class="skill-nav-primary">Explore Fire Gear</a>
+            <a href="skills.html" class="skill-nav-secondary">Browse All Skills</a>
         </div>
     </section>
 

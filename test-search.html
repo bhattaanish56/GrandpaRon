@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Test</title>
+    <style>
+        body { font-family: sans-serif; padding: 20px; max-width: 800px; margin: 0 auto; }
+        .test { margin: 20px 0; padding: 15px; border: 1px solid #ccc; border-radius: 5px; }
+        .test h3 { margin-top: 0; }
+        .results { background: #f5f5f5; padding: 10px; margin-top: 10px; border-radius: 3px; }
+        .result-item { padding: 5px 0; border-bottom: 1px solid #ddd; }
+        .pass { color: green; font-weight: bold; }
+        .fail { color: red; font-weight: bold; }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.6.2"></script>
+</head>
+<body>
+    <h1>Fuzzy Search Test Suite</h1>
+    <div id="tests"></div>
+
+    <script>
+        // Copy search functionality from script.js
+        const SEARCH_SYNONYMS = {
+            fishing: ['angling', 'fish', 'catch', 'rod', 'reel', 'tackle', 'bait'],
+            camping: ['camp', 'tent', 'outdoors', 'backpacking', 'wilderness'],
+            hunting: ['hunt', 'game', 'tracking', 'wildlife', 'deer', 'bow'],
+            hiking: ['hike', 'trail', 'walk', 'trek', 'backpacking'],
+            fire: ['campfire', 'bonfire', 'flames', 'kindling', 'tinder'],
+            gear: ['equipment', 'tools', 'supplies', 'kit'],
+            adventure: ['trip', 'journey', 'expedition', 'explore']
+        };
+
+        const SEARCH_INDEX = [
+            { title: 'Fire', description: 'Learn how to start and maintain a fire in different conditions', url: 'fire.html', category: 'Skills', keywords: 'fire campfire survival flames' },
+            { title: 'Fishing', description: 'Tips techniques and equipment learned from years on the water', url: 'fishing.html', category: 'Skills', keywords: 'fishing angling fish catch rod' },
+            { title: 'Hunting', description: 'Preparation field knowledge and outdoor experience', url: 'hunting.html', category: 'Skills', keywords: 'hunting game tracking wildlife' },
+            { title: 'Camping', description: 'Set up camp stay prepared and enjoy the outdoors', url: 'camping.html', category: 'Skills', keywords: 'camping camp tent shelter' },
+            { title: 'Camping Gear', description: 'Tent sleeping bag backpack camp stove essentials', url: 'gear.html', category: 'Gear', section: 'camping', keywords: 'camping gear tent equipment' },
+            { title: 'Fishing Gear', description: 'Fishing rod reel tackle bait water equipment', url: 'gear.html', category: 'Gear', section: 'fishing', keywords: 'fishing gear rod reel tackle' }
+        ];
+
+        function expandQueryWithSynonyms(query) {
+            const words = query.toLowerCase().split(/\s+/);
+            const expanded = [...words];
+
+            words.forEach(word => {
+                Object.keys(SEARCH_SYNONYMS).forEach(key => {
+                    if (word.includes(key) || key.includes(word)) {
+                        expanded.push(key, ...SEARCH_SYNONYMS[key]);
+                    }
+                    SEARCH_SYNONYMS[key].forEach(syn => {
+                        if (word.includes(syn) || syn.includes(word)) {
+                            expanded.push(key, ...SEARCH_SYNONYMS[key]);
+                        }
+                    });
+                });
+            });
+
+            return [...new Set(expanded)].join(' ');
+        }
+
+        function performSearch(query) {
+            if (!query || query.trim().length < 2) return [];
+
+            const fuseOptions = {
+                keys: [
+                    { name: 'title', weight: 0.5 },
+                    { name: 'description', weight: 0.3 },
+                    { name: 'keywords', weight: 0.2 }
+                ],
+                threshold: 0.4,
+                minMatchCharLength: 2,
+                includeScore: true,
+                ignoreLocation: true
+            };
+
+            const fuse = new Fuse(SEARCH_INDEX, fuseOptions);
+            const expandedQuery = expandQueryWithSynonyms(query);
+            const results = fuse.search(expandedQuery);
+
+            const sorted = results.sort((a, b) => {
+                const aExactTitle = a.item.title.toLowerCase().includes(query.toLowerCase());
+                const bExactTitle = b.item.title.toLowerCase().includes(query.toLowerCase());
+
+                if (aExactTitle && !bExactTitle) return -1;
+                if (!aExactTitle && bExactTitle) return 1;
+
+                return a.score - b.score;
+            });
+
+            return sorted.slice(0, 8).map(r => r.item);
+        }
+
+        // Test cases
+        const tests = [
+            {
+                name: 'Exact match: "fishing"',
+                query: 'fishing',
+                expectedCount: 2,
+                expectedFirst: 'Fishing'
+            },
+            {
+                name: 'Exact match: "fire"',
+                query: 'fire',
+                expectedCount: 1,
+                expectedFirst: 'Fire'
+            },
+            {
+                name: 'Synonym expansion: "angling" (fishing synonym)',
+                query: 'angling',
+                expectedCount: 2,
+                shouldContain: 'Fishing'
+            },
+            {
+                name: 'Multi-word: "camping gear"',
+                query: 'camping gear',
+                expectedCount: 2,
+                shouldContain: 'Camping Gear'
+            },
+            {
+                name: 'Typo handling: "campng" (missing i)',
+                query: 'campng',
+                expectedCount: 2,
+                shouldContain: 'Camping'
+            },
+            {
+                name: 'Typo handling: "fishin" (missing g)',
+                query: 'fishin',
+                expectedCount: 2,
+                shouldContain: 'Fishing'
+            },
+            {
+                name: 'Multiple results: "outdoor"',
+                query: 'outdoor',
+                minExpectedCount: 2
+            }
+        ];
+
+        const testsContainer = document.getElementById('tests');
+
+        tests.forEach(test => {
+            const results = performSearch(test.query);
+            const testDiv = document.createElement('div');
+            testDiv.className = 'test';
+
+            let passed = true;
+            let reasons = [];
+
+            if (test.expectedCount && results.length !== test.expectedCount) {
+                passed = false;
+                reasons.push(`Expected ${test.expectedCount} results, got ${results.length}`);
+            }
+
+            if (test.minExpectedCount && results.length < test.minExpectedCount) {
+                passed = false;
+                reasons.push(`Expected at least ${test.minExpectedCount} results, got ${results.length}`);
+            }
+
+            if (test.expectedFirst && results[0]?.title !== test.expectedFirst) {
+                passed = false;
+                reasons.push(`Expected first result "${test.expectedFirst}", got "${results[0]?.title}"`);
+            }
+
+            if (test.shouldContain && !results.some(r => r.title.includes(test.shouldContain))) {
+                passed = false;
+                reasons.push(`Expected to find "${test.shouldContain}" in results`);
+            }
+
+            testDiv.innerHTML = `
+                <h3>${test.name} <span class="${passed ? 'pass' : 'fail'}">${passed ? 'PASS' : 'FAIL'}</span></h3>
+                <p><strong>Query:</strong> "${test.query}"</p>
+                ${reasons.length > 0 ? `<p style="color: red;"><strong>Issues:</strong> ${reasons.join(', ')}</p>` : ''}
+                <div class="results">
+                    <strong>Results (${results.length}):</strong>
+                    ${results.map((r, i) => `
+                        <div class="result-item">
+                            ${i + 1}. <strong>${r.title}</strong> - ${r.description.substring(0, 60)}...
+                            ${r.section ? `[#${r.section}]` : ''}
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+
+            testsContainer.appendChild(testDiv);
+        });
+
+        // Summary
+        const totalTests = tests.length;
+        const passedTests = document.querySelectorAll('.pass').length;
+        const summaryDiv = document.createElement('div');
+        summaryDiv.style.cssText = 'margin-top: 30px; padding: 20px; background: #e8f5e9; border-radius: 5px; font-size: 18px;';
+        summaryDiv.innerHTML = `
+            <strong>Test Summary:</strong> ${passedTests} / ${totalTests} tests passed
+        `;
+        testsContainer.appendChild(summaryDiv);
+    </script>
+</body>
+</html>

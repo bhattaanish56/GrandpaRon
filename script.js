@@ -122,6 +122,7 @@ async function updateFeaturedVideoMetadata() {
     const title = await fetchYouTubeTitle(videoId);
     if (title) {
         titleElement.textContent = title;
+        titleElement.setAttribute('title', title);
     }
 }
 
