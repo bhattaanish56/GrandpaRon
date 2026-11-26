@@ -700,6 +700,48 @@ document.addEventListener('click', (e) => {
     }
 });
 
+/* ================= WATCH OUR STORY BUTTON ================= */
+
+document.addEventListener('click', (e) => {
+    const storyButton = e.target.closest('.story-button');
+    if (!storyButton) return;
+
+    const href = storyButton.getAttribute('href');
+    if (href !== '#featured') return;
+
+    e.preventDefault();
+
+    const target = document.querySelector('.featured');
+    if (!target) return;
+
+    const navbarHeight = 79;
+    const targetPosition = target.getBoundingClientRect().top + window.scrollY - navbarHeight;
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    window.scrollTo({
+        top: targetPosition,
+        behavior: reducedMotion ? 'auto' : 'smooth'
+    });
+
+    // Trigger video playback after scroll completes
+    setTimeout(() => {
+        const container = document.querySelector('.featured .youtube-embed-container');
+        if (!container || container.querySelector('iframe')) return;
+
+        const videoId = container.dataset.videoId;
+        if (!videoId) return;
+
+        const iframe = document.createElement('iframe');
+        iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&mute=0`;
+        iframe.frameBorder = '0';
+        iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+        iframe.allowFullscreen = true;
+
+        container.innerHTML = '';
+        container.appendChild(iframe);
+    }, reducedMotion ? 100 : 800);
+});
+
 
 /* ================= SCROLL REVEAL ================= */
 

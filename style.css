@@ -1177,7 +1177,7 @@ button {
 }
 
 .skill-img-fire {
-    object-position: center 15%;
+    object-position: center top;
 }
 
 
@@ -2166,6 +2166,36 @@ img[loading="lazy"].loaded {
     color: rgba(255,255,255,0.85);
 }
 
+/* Hunting page: compact hero */
+#hunting-hero {
+    min-height: 520px;
+    padding: 120px 8% 60px;
+    background:
+        linear-gradient(
+            to right,
+            rgba(14, 40, 30, 0.88),
+            rgba(14, 40, 30, 0.2)
+        ),
+        url("assets/grandpa-hunting.png")
+        75% 40%/cover no-repeat;
+}
+
+@media (max-width: 1023px) {
+    #hunting-hero {
+        min-height: 450px;
+        padding: 100px 8% 50px;
+        background-position: 70% center;
+    }
+}
+
+@media (max-width: 767px) {
+    #hunting-hero {
+        min-height: 380px;
+        padding: 80px 8% 40px;
+        background-position: 65% center;
+    }
+}
+
 
 /* VIDEO SECTION */
 
@@ -2194,6 +2224,25 @@ img[loading="lazy"].loaded {
     margin: 0 auto;
     overflow: hidden;
     background: var(--forest);
+    border-radius: 12px;
+}
+
+/* Hunting video section refinements */
+#hunting-video .video-container {
+    border-radius: 12px;
+}
+
+#hunting-video .section-heading {
+    margin: 0 auto 50px;
+}
+
+#hunting-video .video-intro {
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: var(--muted);
+    max-width: 700px;
+    margin: 18px auto 40px;
+    text-align: center;
 }
 
 .video-container video {
@@ -2277,6 +2326,55 @@ img[loading="lazy"].loaded {
     color: var(--text);
 }
 
+/* Hunting page: structured check items with descriptions */
+#content .check-item {
+    align-items: flex-start;
+}
+
+#content .check-item > div {
+    flex: 1;
+}
+
+#content .check-title {
+    margin: 0 0 8px 0;
+    color: var(--text);
+    font-weight: 500;
+}
+
+#content .check-desc {
+    margin: 0;
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: var(--muted);
+}
+
+#content .gear-link {
+    display: inline-block;
+    margin-top: 30px;
+    color: var(--brown);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+#content .gear-link:hover {
+    color: var(--forest);
+}
+
+/* Hunting page: mobile responsive preparation section */
+@media (max-width: 768px) {
+    #content .content-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+        padding: 0 22px;
+    }
+
+    #content .content-grid h2 {
+        font-size: 2.2rem;
+        text-align: left;
+    }
+}
+
 
 /* CREAM SECTION */
 
@@ -2331,9 +2429,10 @@ img[loading="lazy"].loaded {
 }
 
 .more-story h2 {
-    font-size: clamp(3rem, 6vw, 5.5rem);
-    line-height: 0.95;
-    letter-spacing: -0.05em;
+    font-family: "Inria Serif", serif;
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
     margin: 18px 0 40px;
 }
 
@@ -2352,6 +2451,69 @@ img[loading="lazy"].loaded {
     letter-spacing: 0.12em;
     text-transform: uppercase;
     color: #68736b;
+}
+
+/* Skill page closing navigation */
+.skill-closing-nav {
+    background: var(--cream-light);
+    padding: 60px 8%;
+    text-align: center;
+}
+
+.skill-closing-nav-buttons {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.skill-nav-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 24px;
+    border-radius: 30px;
+    font-size: 13px;
+    font-weight: 600;
+    background: var(--forest);
+    color: white;
+    text-decoration: none;
+    transition: all 0.25s ease;
+}
+
+.skill-nav-primary:hover {
+    background: var(--forest-dark);
+    transform: translateY(-2px);
+}
+
+.skill-nav-secondary {
+    color: var(--forest);
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 500;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.25s ease;
+}
+
+.skill-nav-secondary:hover {
+    border-bottom-color: var(--forest);
+}
+
+@media (max-width: 600px) {
+    .skill-closing-nav {
+        padding: 40px 6%;
+    }
+
+    .skill-closing-nav-buttons {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .skill-nav-primary {
+        width: 100%;
+        justify-content: center;
+    }
 }
 
 /* ========================================
